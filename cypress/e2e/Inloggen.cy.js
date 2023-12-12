@@ -5,7 +5,7 @@ describe('POC', () => {
       {
        failOnStatusCode: false,
     })
-    cy.wait(10000)
+    cy.wait(5000)
     cy.get('#Username').type('Richard')
     cy.get('#Password').type('Nathoe')
     cy.get('#Login').click()
