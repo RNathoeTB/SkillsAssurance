@@ -23,3 +23,12 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+beforeEach(() => {
+    cy.log('Go to url')
+    cy.visit(
+        'https://testing.skillsv10.com/',
+            {
+             failOnStatusCode: false,
+          })
+
+  })
