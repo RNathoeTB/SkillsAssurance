@@ -1,4 +1,4 @@
-name: Cypress Run
+name: Cypress Run Main in Cloud
 
 on:
   push:
