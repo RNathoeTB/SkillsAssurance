@@ -1,0 +1,25 @@
+name: Cypress Run
+
+on:
+  push:
+    branches:
+      - test
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Cypress Run
+        run: npx cypress run --record --key fb6bf00d-5e8c-4630-8463-05a64c9f2650 --browser chrome
