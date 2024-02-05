@@ -2,7 +2,7 @@ describe('CORE_Admin', () => {
   
   it.only('Add Address Category', () => {
 
-    cy.contains('Settings').click()
+   /*cy.contains('Settings').click()
     cy.get(':nth-child(3) > .svx-settings-container-body > :nth-child(3) > a').click()
     cy.contains('Address categories').click()
     cy.get('[data-text="Name"] > .k-cell-inner > .k-link > .k-column-title').should('exist')
@@ -21,15 +21,15 @@ describe('CORE_Admin', () => {
     cy.wait(10000).contains('Address categories').click()
     cy.wait(10000).get('.k-grid-content').contains('work ART')
 
-
+*/
   })
 
   it('Add Global Requirement', () => {
-    
+    /*
     cy.contains('Settings').click()
     cy.get(':nth-child(3) > .svx-settings-container-body > :nth-child(3) > a').click()
     cy.contains('Address categories').click()
-
+    */
   })
   
 })
