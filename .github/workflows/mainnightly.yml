@@ -1,4 +1,4 @@
-name: Cypress Nightly Run
+name: Main Nightly Run
 
 on:
   schedule:
