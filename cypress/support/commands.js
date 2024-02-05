@@ -27,14 +27,9 @@ beforeEach(() => {
     cy.log('Go to url')
     cy.viewport(1200,660)
     cy.clearAllCookies()
-    cy.log('Observe screen')
     cy.visit(
         'https://testing.skillsv10.com/',
             {
              failOnStatusCode: false,
           })
-          cy.wait(10000).get('#Username').type('Richard')
-          cy.get('#Password').type('Nathoe')
-          cy.get('#Login').click()
-          cy.wait(10000)
   })
