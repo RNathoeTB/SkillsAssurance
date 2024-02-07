@@ -22,4 +22,4 @@ jobs:
         run: npm install
 
       - name: Cypress Run
-        run: npx cypress run --key fb6bf00d-5e8c-4630-8463-05a64c9f2650 --browser chrome
+        run: npx cypress run --record false --key fb6bf00d-5e8c-4630-8463-05a64c9f2650 --browser chrome
