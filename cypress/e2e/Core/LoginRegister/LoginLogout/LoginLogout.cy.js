@@ -21,7 +21,7 @@ describe('Login & Logout', () => {
     cy.get('#Password').type('Nathoe')
     cy.get('#Login').click()
     cy.contains('Dashboard').should('be.visible')
-    cy.get('#Login').click()
+    
   })
 
   it('Logout', () => {
