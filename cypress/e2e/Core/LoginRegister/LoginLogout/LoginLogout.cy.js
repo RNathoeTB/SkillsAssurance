@@ -39,7 +39,6 @@ describe('Login & Logout', () => {
     cy.log('2. Click on Logout option')
     cy.contains('Logout').click();
     cy.contains('Welcome back').should('be.visible')
-    
   })
 
 })
