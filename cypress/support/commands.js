@@ -25,7 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 beforeEach(() => {
     cy.log('Go to url')
-    cy.viewport(1200,660)
+    cy.viewport(1920,1080)
     cy.clearAllCookies()
     cy.visit(
         'https://testing.skillsv10.com/',
