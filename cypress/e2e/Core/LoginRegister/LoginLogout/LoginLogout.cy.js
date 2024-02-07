@@ -41,7 +41,7 @@ describe('Login & Logout', () => {
     cy.contains('Welcome back').should('be.visible')
   })
 
-  it.only('Forgot Password', () => {
+  it('Forgot Password', () => {
     cy.log('1. Observe opened \'Welcome back\' screen')
     cy.contains('Forgot password?').should('be.visible')
 
