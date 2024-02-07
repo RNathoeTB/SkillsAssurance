@@ -32,7 +32,6 @@ describe('Forgot Password', () => {
     cy.get('#setpassword-submit-btn').click()
     cy.contains('An email is sent to you with instructions to reset your new password.').should('be.visible')
     
-    
   })
 
 })
