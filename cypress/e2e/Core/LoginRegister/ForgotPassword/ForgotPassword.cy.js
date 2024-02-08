@@ -38,8 +38,6 @@ describe('Forgot Password', () => {
     cy.get('input[name="Username"]')
     cy.get('#setpassword-submit-btn').click()
     
-    
-
 
   }) 
 
