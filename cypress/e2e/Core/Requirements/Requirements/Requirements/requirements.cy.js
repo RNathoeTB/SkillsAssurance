@@ -25,7 +25,7 @@ describe('Requirements', () => {
       cy.get(':nth-child(2) > .svx-block-body > :nth-child(1) > .svx-formfield-label > .required-field').should('have.text', 'Requirement type')
       cy.get(':nth-child(5) > .svx-formfield-label > .required-field').should('have.text', 'Requirement group')
 
-      cy.log('3.Fill Requirement type, select Requirement group and select Evidence Type')
+      cy.log('3. Fill Requirement type, select Requirement group and select Evidence Type')
       cy.get(':nth-child(1) > .svx-block-body > :nth-child(1) > .svx-formfield-content > .k-combobox > .k-input-inner').type('Certificate')
       cy.wait(3000)
       cy.get(':nth-child(1) > .svx-block-body > :nth-child(1) > .svx-formfield-content > .k-combobox > .k-input-inner').type('{enter}')
@@ -35,9 +35,19 @@ describe('Requirements', () => {
       cy.get('input.k-input-inner').eq(6).type('Europe')
       cy.wait(3000)
       cy.get('input.k-input-inner').eq(6).type('{enter}')
+      cy.get('input.k-input-inner').eq(1).type('Certificate 123')
+      cy.wait(3000)
+      cy.get('input.k-input-inner').eq(1).type('{enter}')
 
+      cy.log('4. Select an evidence and click \'CANCEL\'')
+      //cy.get(':nth-child(1) > .telerik-blazor > .k-button-text').should('have.text', 'Cancel').click()
+      //Bij deze stap gaat hij in een error en vraagt een reload. Ik al het even over. 
 
+      cy.log('5. Repeat step 2, select an Evidence and click \'SAVE\'')
+      
     })
+
+    
   
     // Voeg hier meer tests toe...
   })
