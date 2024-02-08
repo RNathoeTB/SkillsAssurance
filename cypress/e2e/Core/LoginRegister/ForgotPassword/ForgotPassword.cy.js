@@ -22,7 +22,25 @@ describe('Forgot Password', () => {
     cy.get('#Username').should('have.attr', 'placeholder', 'Username')
     cy.get('#Username').type('Ricardo')
     cy.get('input[name="Username"]').should('have.value', 'Ricardo')
+    cy.get('#setpassword-submit-btn').click()
 
-  })
+    cy.log('5. Click on the \'SEND\' button')
+    cy.get('#setpassword-submit-btn').click()
+    cy.get('.login-card-subheader').should('be.visible')
+    cy.get('li').should('be.visible')
+
+    cy.log('6. Enter a username for an existing account')
+    cy.get('#Username').clear()
+    cy.get('#Username').type('Richard')
+    cy.get('input[name="Username"]').should('have.value', 'Richard')
+
+    cy.log('7. Repeat step 5')
+    cy.get('input[name="Username"]')
+    cy.get('#setpassword-submit-btn').click()
+    
+    
+
+
+  }) 
 
 })
