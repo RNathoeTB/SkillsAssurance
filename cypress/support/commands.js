@@ -28,7 +28,7 @@ beforeEach(() => {
     cy.viewport(1920,1080)
     cy.clearAllCookies()
     cy.visit(
-        'https://testing.skillsv10.com/',
+        'https://testautomation.skillsv10.com/',
             {
              failOnStatusCode: false,
           })
