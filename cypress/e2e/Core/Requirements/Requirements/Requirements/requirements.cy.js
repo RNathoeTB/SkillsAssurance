@@ -8,7 +8,7 @@ describe('Requirements', () => {
       cy.get('#Login').click()  
     })
   
-    it.only('Add Global Requirement', () => {
+    it('Add Global Requirement', () => {
 
       cy.log('1. Observe the grid')
       cy.contains('Requirements').click()
@@ -131,17 +131,9 @@ describe('Requirements', () => {
       cy.wait(10000)
       cy.contains('Advanced').should('be.visible')
 
-
-
-
-
-
-
-
-
     })
 
-    it('Add Organizational Unit Group Requirement', () => {
+    it.only('Add Organizational Unit Group Requirement', () => {
       cy.log('1. Observe the grid')
       cy.get('#tree-item-8 > :nth-child(1) > .k-item-text').click()
       cy.get('#tree-item-8_0 > .k-link > .k-item-text').click()
@@ -174,6 +166,11 @@ describe('Requirements', () => {
       cy.get('input[type="text"][role="combobox"]').eq(1).type('Basic First Aid')
       cy.wait(3000)
       cy.get('input[type="text"][role="combobox"]').eq(1).type('{enter}') 
-      cy.get('.modal-buttons > :nth-child(1) > .telerik-blazor').click()
+
+
+      cy.log('4. Select an evidence and click \'CANCEL\'. skipped because it excists in another testcase')
+
+      cy.log('5. Repeat step 2, select an Evidence and click \'SAVE\'')
+      cy.get(':nth-child(2) > .telerik-blazor > .k-button-text').click();
     }) 
   })
