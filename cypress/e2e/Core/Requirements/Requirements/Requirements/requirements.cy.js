@@ -40,20 +40,8 @@ describe('Requirements', () => {
       cy.get('input.k-input-inner').eq(1).type('{enter}')
 
       cy.log('4. Select an evidence and click \'CANCEL\'')
-      //cy.get(':nth-child(1) > .telerik-blazor > .k-button-text').should('have.text', 'Cancel').click()
-      //Bij deze stap gaat hij in een error en vraagt een reload. Ik al het even over. 
-
       cy.log('5. Repeat step 2, select an Evidence and click \'SAVE\'')
       
-    })
-
-    
-  
-    // Voeg hier meer tests toe...
-  })
-      cy.get('[data-text="Requirement group"] > .k-cell-inner > .k-link > .k-column-title').should('be.visible')
-
-
     })
 
     it.only('Add Organizational Unit Group Requirement', () => {
@@ -91,18 +79,8 @@ describe('Requirements', () => {
       cy.get('input[type="text"][role="combobox"]').eq(1).type('{enter}') 
 
       cy.get('.modal-buttons > :nth-child(1) > .telerik-blazor').click()
-
-
-    
-
-
-});
-
-      
-
-
- 
-
-
     })
+
   
+    
+  })
