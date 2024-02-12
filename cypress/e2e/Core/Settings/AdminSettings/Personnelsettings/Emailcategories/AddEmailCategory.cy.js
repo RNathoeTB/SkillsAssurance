@@ -17,7 +17,7 @@ it.only('Add Email Category', () => {
     cy.get('.svx-grid').contains('th', 'Name').should('exist')
     cy.get('.svx-grid').contains('th', 'Name').should('exist')
 
-cy.get('k-table-td k-grid-content-sticky').find('.label').its('length').then(initialCount => {
+    cy.get('k-table-td k-grid-content-sticky').find('.label').its('length').then(initialCount => {
     
     cy.log('2. Click on \'ADD\' button')
     cy.get('.svx-button > .telerik-blazor').click()
@@ -31,7 +31,7 @@ cy.get('k-table-td k-grid-content-sticky').find('.label').its('length').then(ini
     cy.get('.svx-modal-buttons > :nth-child(1) > .telerik-blazor').click()
     cy.get('.svx-page-header-title').should('have.text', 'Personnel settings')
 
-cy.get('k-table-td k-grid-content-sticky').find('.label').its('length').should('eq', initialCount + 1);
+    cy.get('k-table-td k-grid-content-sticky').find('.label').its('length').should('eq', initialCount + 1);
         })
 
 
