@@ -92,7 +92,7 @@ describe('Requirements', () => {
       cy.get('input.k-input-inner').eq(6).type('Europe')
       cy.wait(3000)
       cy.get('input.k-input-inner').eq(6).type('{enter}')
-      cy.get('input.k-input-inner').eq(1).type('Certificate 123')
+      cy.get('input.k-input-inner').eq(1).type('AICC Award')
       cy.wait(3000)
       cy.get('input.k-input-inner').eq(1).type('{enter}')
       cy.get(':nth-child(2) > .telerik-blazor > .k-button-text').click();
@@ -118,6 +118,25 @@ describe('Requirements', () => {
           throw new Error('Kan het eerste of nieuwe nummer niet vinden');
         }
       });
+
+      cy.log('6. Go to Employee profile of any Employee > Evidences tab. Search for the Evidence used in step 5.')
+      cy.get('#tree-item-4 > .k-link > .k-item-text').click() //click personal
+      cy.get('#tree-item-4_0 > .k-link > .k-item-text').click()
+      cy.wait(10000)
+      cy.get('td.k-grid-header-sticky:nth-child(2) > div:nth-child(1) > div:nth-child(1) > span:nth-child(1)').type('Jasper');
+      cy.wait(10000)
+      cy.get('.span-nav').click()
+      cy.wait(10000)
+      cy.get('.k-link > .svx-font-2').eq(3).click()
+      cy.wait(10000)
+      cy.contains('Advanced').should('be.visible')
+
+
+
+
+
+
+
 
 
     })
