@@ -79,9 +79,5 @@ describe('Requirements', () => {
       cy.get('input[type="text"][role="combobox"]').eq(1).type('{enter}') 
 
       cy.get('.modal-buttons > :nth-child(1) > .telerik-blazor').click()
-
-      
-    })
-
-    
+    }) 
   })
