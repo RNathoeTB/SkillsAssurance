@@ -44,7 +44,7 @@ describe('Requirements', () => {
       
     })
 
-    it.only('Add Organizational Unit Group Requirement', () => {
+    it('Add Organizational Unit Group Requirement', () => {
       cy.log('1. Observe the grid')
       cy.get('#tree-item-8 > :nth-child(1) > .k-item-text').click()
       cy.get('#tree-item-8_0 > .k-link > .k-item-text').click()
@@ -79,8 +79,9 @@ describe('Requirements', () => {
       cy.get('input[type="text"][role="combobox"]').eq(1).type('{enter}') 
 
       cy.get('.modal-buttons > :nth-child(1) > .telerik-blazor').click()
+
+      
     })
 
-  
     
   })
