@@ -457,13 +457,30 @@ describe('Requirements', () => {
 
 
 
-      }) 
+    }) 
 
-      it.only('Validation on Add/Edit Requirements', () => {
+      it('Validation on Add/Edit Requirements', () => {
         cy.log('1. Do not fill any field in and click \'SAVE\' button ')
         cy.get('#tree-item-8 > :nth-child(1) > .k-item-text').click()
         cy.get('#tree-item-8_0 > .k-link > .k-item-text').click()
         cy.get('.svx-button > .telerik-blazor').click()
+        cy.get(':nth-child(2) > .telerik-blazor > .k-button-text').click();
+        cy.get('.k-input-inner').eq(1).should('have.attr', 'aria-invalid', 'true');
+        cy.get('.k-input-inner').eq(2).should('have.attr', 'aria-invalid', 'true');
+        cy.get('.k-input-inner').eq(6).should('have.attr', 'aria-invalid', 'true');
+
+        cy.log('2. Select \'Requirement type 1', 'Requirement group 1\' and Evidence Type \'Certificate\' and click \'SAVE\'')
+        cy.get('input[type="text"][role="combobox"]').eq(0).type('Certificate')
+        cy.wait(3000)
+        cy.get('input[type="text"][role="combobox"]').eq(0).type('{enter}')
+        cy.get('input[type="text"][role="combobox"]').eq(2).type('Company Mandatory')
+        cy.wait(3000)
+        cy.get('input[type="text"][role="combobox"]').eq(2).type('{enter}')
+        cy.get('input.k-input-inner').eq(6).type('Europe')
+        cy.wait(3000)
+        cy.get('input.k-input-inner').eq(6).type('{enter}')
+        cy.get(':nth-child(2) > .telerik-blazor > .k-button-text').click();
+        cy.get('.k-input-inner').eq(1).should('have.attr', 'aria-invalid', 'true');
 
       }) 
 
