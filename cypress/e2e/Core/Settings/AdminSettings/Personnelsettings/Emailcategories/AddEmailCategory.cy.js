@@ -14,8 +14,8 @@ it.only('Add Email Category', () => {
     cy.get('#tree-item-12 > .k-link > .k-item-text').click()
     cy.contains('Personnel settings').click()
     cy.contains('Email categories').click()
-    cy.get('.svx-grid').contains('th', 'Name').should('exist')
-    cy.get('.svx-grid').contains('th', 'Name').should('exist')
+    cy.get('[data-text="Name"] > .k-cell-inner > .k-link > .k-column-title').contains('Name')
+    cy.get('[data-text="Work"] > .k-cell-inner > .k-link > .k-column-title').contains('Work')
 
     
     cy.log('2. Click on \'ADD\' button')
@@ -74,10 +74,33 @@ it.only('Add Email Category', () => {
     cy.log('8. Go to Personnel -> Personnel and open any employee profile.')
     cy.get('#tree-item-4 > .k-link').click()
     cy.get('#tree-item-4_0 > .k-link').click()
-    cy.wait(5000)
+
     // Employee profile is opened in Details tab 
-    cy.get('[data-render-row-index="2"] > [data-col-index="1"] > .span-nav').click()
-    cy.get('.k-tabstrip-items').contains('Details') 
+    // cy.get('.k-grid-content').contains('Frederike Lindeyer ()').click()
+    cy.get('.k-filter-row > [data-col-index="1"]').type('Rich Nathoe ()')
+    cy.get('.k-grid-content').contains('Rich Nathoe ()').click()
+    cy.get('.k-tabstrip-items').contains('Details').click()
+
+    cy.log('9. Click \'EDIT\' button and on \'Contact info\' section expand \'Email\(s)\'. Click on the \'Add email\' link and open the \'Category\' drop down.')
+    cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
+    cy.get(':nth-child(2) > details > summary > .k-icon').click()
+    cy.get(':nth-child(2) > details > .svx-panelbar-item-footer > .svx-button > .k-button').click()
+   
+    cy.get('button.telerik-blazor').eq(4).click()
+    cy.wait(3000)
+    // List of predefined categories is displayed. Email category just created can be selected.
+    cy.contains('.k-list-item-text', 'WorkART').click()
+  
+
+    cy.log('10. Select the newly created category, fill in all other required fields and press \'SAVE\'')
+    //not clear which are the required fields
+    cy.get(':nth-child(1) > .svx-panelbar-type-section > :nth-child(2) > .svx-formfield-content > .input-group').type('testauto@outlook.nl')
+    cy.wait(2000)
+    cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
+
+
+
+
 
 
 
