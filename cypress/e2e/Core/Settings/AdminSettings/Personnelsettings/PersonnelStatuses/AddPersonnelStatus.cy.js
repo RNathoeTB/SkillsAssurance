@@ -89,7 +89,21 @@ describe('Settings > Personnel settings', () => {
    cy.get('.k-master-row > [data-col-index="1"]').should('contain', 'TestBoticsRN')
 
    cy.log('6. Navigate to Employees overview grid and open an Employee profile; within the Organization tab, click \'EDIT\' and open the Personnel status drop down ')
+   cy.get('#tree-item-4 > .k-link > .telerik-blazor').click()
+   cy.get('#tree-item-4_0 > .k-link > .k-item-text') .click()
+   cy.wait(3000)
+   cy.get('[data-render-row-index="2"] > [data-col-index="1"] > .span-nav').click()
+   cy.get('.k-tabstrip-items').eq(4).click()
+   cy.wait(3000)
+   cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
+   cy.get('.svx-column-block-right > .svx-block > .svx-block-body > :nth-child(1) > .svx-formfield-content').contains('.telerik-blazor').click()
    
+
+
+
+
+
+
 
 
  
