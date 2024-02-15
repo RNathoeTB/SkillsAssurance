@@ -6,6 +6,16 @@ describe('Settings', () => {
     cy.get('#Username').type('Richard')
     cy.get('#Password').type('Nathoe')
     cy.get('#Login').click()  
+
+  cy.log('Cleanup')
+   cy.get('#tree-item-12 > .k-link > .k-item-text').click()
+   cy.contains('Personnel settings').click()
+   cy.contains('Email categories').click()
+   cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper').type('WorkART')
+   cy.wait(1000)
+   cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
+   cy.get('.k-button-solid-primary').click()
+
   })
 
 
@@ -87,7 +97,7 @@ it.only('Add Email Category', () => {
     cy.get(':nth-child(2) > details > .svx-panelbar-item-footer > .svx-button > .k-button').click()
    
     cy.get('button.telerik-blazor').eq(4).click()
-    cy.wait(3000)
+    cy.wait(1000)
     // List of predefined categories is displayed. Email category just created can be selected.
     cy.contains('.k-list-item-text', 'WorkART').click()
   
