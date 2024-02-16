@@ -87,16 +87,41 @@ describe('Settings > Personnel settings', () => {
   //  The list is updated by newly created item.
    cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper').type('TestBoticsRN')
    cy.get('.k-master-row > [data-col-index="1"]').should('contain', 'TestBoticsRN')
-
+   
    cy.log('6. Navigate to Employees overview grid and open an Employee profile; within the Organization tab, click \'EDIT\' and open the Personnel status drop down ')
+  //  Navigate to Employees overview grid
    cy.get('#tree-item-4 > .k-link > .telerik-blazor').click()
    cy.get('#tree-item-4_0 > .k-link > .k-item-text') .click()
-   cy.wait(3000)
+  //  open an Employee profile
    cy.get('[data-render-row-index="2"] > [data-col-index="1"] > .span-nav').click()
-   cy.get('.k-tabstrip-items').eq(4).click()
-   cy.wait(3000)
+   cy.wait(1000)
+   cy.get('.k-link > .svx-font-2').eq(1).click()
+  //  click 'EDIT' and open the Personnel status drop down
+
    cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
-   cy.get('.svx-column-block-right > .svx-block > .svx-block-body > :nth-child(1) > .svx-formfield-content').contains('.telerik-blazor').click()
+   cy.get('.svx-column-block-right > .svx-block > .svx-block-body > :nth-child(1) > .svx-formfield-content button').click()
+   cy.wait(3000)
+  //  The newly created item is available for selection
+
+   cy.log('7. Select the newly created status and press \'SAVE\' ')
+   // Click to open the dropdown
+  // cy.get('.k-popup').click();
+// Wait for the dropdown options to appear
+cy.get('.k-list-content').should('be.visible');
+cy.wait(3000)
+// Search for and select "TestBoticsRN"
+//cy.get('.k-popup .k-list-container .k-combobox-popup').contains('.k-item', 'TestBoticsRN').click()
+
+cy.contains('.k-popup .k-list-container .k-combobox-popup[data-text="TestBoticsRN"]', { timeout: 50000 }).click();
+
+
+
+  
+
+
+
+  
+
    
 
 
