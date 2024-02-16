@@ -17,6 +17,7 @@ describe('Settings > Personnel settings', () => {
    cy.get('.k-button-solid-primary').click()
   })
   
+
   it.only('Add Personnel Status', () => {
    cy.log('1. Observe the grid')
     // The grid consists of columns:
@@ -102,10 +103,8 @@ describe('Settings > Personnel settings', () => {
   
    //  The newly created item is available for selection
    
-
-
-
    cy.log('7. Select the newly created status and press \'SAVE\' ')
+
 
   
     })
