@@ -17,7 +17,6 @@ describe('Settings > Personnel settings', () => {
    cy.get('.k-button-solid-primary').click()
   })
   
-
   it.only('Add Personnel Status', () => {
    cy.log('1. Observe the grid')
     // The grid consists of columns:
@@ -97,50 +96,17 @@ describe('Settings > Personnel settings', () => {
    cy.wait(1000)
    cy.get('.k-link > .svx-font-2').eq(1).click()
   //  click 'EDIT' and open the Personnel status drop down
-
    cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
-   cy.get('.svx-column-block-right > .svx-block > .svx-block-body > :nth-child(1) > .svx-formfield-content button').click()
-   cy.wait(3000)
-  //  The newly created item is available for selection
-
-   cy.log('7. Select the newly created status and press \'SAVE\' ')
-   // Click to open the dropdown
-  // cy.get('.k-popup').click();
-// Wait for the dropdown options to appear
-cy.get('.k-list-content').should('be.visible');
-cy.wait(3000)
-// Search for and select "TestBoticsRN"
-//cy.get('.k-popup .k-list-container .k-combobox-popup').contains('.k-item', 'TestBoticsRN').click()
-
-cy.contains('.k-popup .k-list-container .k-combobox-popup[data-text="TestBoticsRN"]', { timeout: 50000 }).click();
-
-
-
   
-
-
-
   
-
+  
+   //  The newly created item is available for selection
    
 
 
 
+   cy.log('7. Select the newly created status and press \'SAVE\' ')
 
-
-
-
-
- 
-
-
-
-
-
-  
-  
-  
-  
   
     })
   
