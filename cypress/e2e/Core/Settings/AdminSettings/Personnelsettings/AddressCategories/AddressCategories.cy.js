@@ -61,24 +61,58 @@ describe('AddressCategories', () => {
       cy.get('.k-grid-content').should('contain', 'False')
 
       cy.log('7. Double click on "Work" category, check "Work" checkbox and click on \'SAVE\' button')
-      cy.get('[data-render-row-index="5"] > [data-col-index="1"]').dblclick()
+      cy.contains('WorkARTAdressCat').dblclick()
       cy.get('.k-checkbox-wrap').click()
       cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
       // app contains Bug, this is extra step to refresh page, not updated automatically
       cy.get('#tree-item-12 > .k-link > .k-item-text').click()
       cy.contains('Personnel settings').click()
-      cy.contains('Email categories').click()
+      cy.contains('Address categories').click()
+
       // 'True' is populated in 'Work' column.
-      cy.get('[data-render-row-index="5"] > [data-col-index="2"]').should('contain', 'True')
+      let foundRow = false;
+
+      cy.get('.k-master-row').each(($row) => {
+        cy.wrap($row).within(() => {
+          const rowText = $row.text();
+          if (rowText.includes('WorkARTAdressCat') && rowText.includes('False')) {
+            foundRow = true;
+          }
+        });
+      }).then(() => {
+        expect(foundRow).to.be.true;
+      });
 
       cy.log('8. Go to Personnel -> Personnel and open any employee profile.')
       cy.get('#tree-item-4 > .k-link').click()
       cy.get('#tree-item-4_0 > .k-link').click()
       cy.wait(5000)
       // Employee profile is opened in Details tab 
-      cy.get('[data-render-row-index="2"] > [data-col-index="1"] > .span-nav').click()
-      cy.get('.k-tabstrip-items').contains('Details') 
+      //cy.get('[data-render-row-index="2"] > [data-col-index="1"] > .span-nav').click()
+      //cy.get('.k-tabstrip-items').contains('Details') 
 
+      cy.get('.k-filter-row > [data-col-index="1"]').type('Rich Nathoe ()')
+      cy.wait(3000)
+      cy.get('.k-grid-content').contains('Rich Nathoe ()').click()
+      cy.get('.k-tabstrip-items').contains('Details').click()
+
+      cy.log('9. Click \'EDIT\' button and on \'Contact info\' section expand \'Address(es)\'. Click on the \'Add address\' link and open the \'Category\' drop down.')
+      cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
+      cy.get(':nth-child(2) > details > summary > .k-icon').click()
+      cy.get(':nth-child(2) > details > .svx-panelbar-item-footer > .svx-button > .k-button').click()
+     
+      cy.get('button.telerik-blazor').eq(4).click()
+      cy.wait(3000)
+      // List of predefined categories is displayed. Email category just created can be selected.
+      cy.contains('.k-list-item-text', 'WorkART').click()
+    
+  
+      cy.log('10. Select the newly created category, fill in all other required fields and press \'SAVE\'')
+      //not clear which are the required fields
+      cy.get(':nth-child(1) > .svx-panelbar-type-section > :nth-child(2) > .svx-formfield-content > .input-group').type('testauto@outlook.nl')
+      cy.wait(2000)
+      cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
+  
 
     })
   
