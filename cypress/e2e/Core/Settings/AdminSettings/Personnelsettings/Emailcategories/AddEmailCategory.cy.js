@@ -60,9 +60,10 @@ it.only('Add Email Category', () => {
   
     cy.log('5. Observe the grid list')
     // app contains Bug, this is extra step to refresh page, not updated automatically
-    cy.get('#tree-item-12 > .k-link > .k-item-text').click()
-    cy.contains('Personnel settings').click()
-    cy.contains('Email categories').click()
+    cy.log('app contains Bug, this is extra step to refresh page, not updated automatically')
+    //cy.get('#tree-item-12 > .k-link > .k-item-text').click()
+    //cy.contains('Personnel settings').click()
+    //cy.contains('Email categories').click()
     // The list is updated by newly created email categories.
     cy.get('.k-grid-content').should('contain', 'WorkART')
 
@@ -74,10 +75,10 @@ it.only('Add Email Category', () => {
     cy.get('[data-render-row-index="5"] > [data-col-index="1"]').dblclick()
     cy.get('.k-checkbox-wrap').click()
     cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
-    // app contains Bug, this is extra step to refresh page, not updated automatically
-    cy.get('#tree-item-12 > .k-link > .k-item-text').click()
-    cy.contains('Personnel settings').click()
-    cy.contains('Email categories').click()
+    cy.log('app contains Bug, this is extra step to refresh page, not updated automatically')
+    //cy.get('#tree-item-12 > .k-link > .k-item-text').click()
+    //cy.contains('Personnel settings').click()
+    //cy.contains('Email categories').click()
     // 'True' is populated in 'Work' column.
     cy.get('[data-render-row-index="5"] > [data-col-index="2"]').should('contain', 'True')
 
