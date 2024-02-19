@@ -29,7 +29,6 @@ it.only('Edit Personnel Status', () => {
   cy.get('.k-grid-content').should('contain', 'Testcase2385')
   cy.contains('Testcase2385').dblclick()
 //'Personnel status' pop-up appears. It contains all of the prefilled data.
-
   cy.get('.svx-modal-header').contains('Personnel status')
   cy.get('.required-field').contains('Name')
   cy.get(':nth-child(2) > .svx-formfield-label > label').contains('Description')
@@ -40,7 +39,7 @@ it.only('Edit Personnel Status', () => {
   cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').clear()
   cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').type('Testcase2385ART')
   cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
-  
+  cy.wait(2000)
 // Pop-up closes.
   cy.get('.svx-modal-header > div').should('not.exist')
 // The new Name is visible in the grid in place of the old Name.
@@ -54,7 +53,6 @@ it.only('Edit Personnel Status', () => {
   cy.log('3. Open the same record again. Change the \'Description\' field to another valid text. Click \'Save\'.')
   cy.get(':nth-child(2) > .svx-formfield-content > .input-group > .k-textbox').clear().type('Testen RN')
   cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
-
   cy.get('#tree-item-12 > .k-link > .k-item-text').click()
   cy.get(':nth-child(3) > .svx-settings-container-body > :nth-child(3) > a').contains('Personnel settings').click()
   cy.get(' .k-link > .svx-font-2').eq(4).click()
@@ -62,7 +60,30 @@ it.only('Edit Personnel Status', () => {
   cy.get('.k-grid-content').should('contain', 'Testcase2385ART')
   cy.get('.k-grid-content').contains('Testen RN')
 
+  cy.log('4. Open the same record again. Pick different color in \'Color\' picker. Click \'Save\'.')
+  cy.get('#tree-item-12 > .k-link > .k-item-text').click()
+  cy.get(':nth-child(3) > .svx-settings-container-body > :nth-child(3) > a').contains('Personnel settings').click()
+  cy.get(' .k-link > .svx-font-2').eq(4).click()
+  cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Testcase2385ART')
+  cy.get('.k-grid-content').should('contain', 'Testcase2385ART')
+  cy.contains('Testcase2385ART').dblclick()
+
+  cy.get('[aria-label="Current selected color is "] > :nth-child(2)').click()
+  // cy.get(' .k-button > .telerik-blazor').eq(15).click()
+  cy.get('.k-hsv-gradient').then($element => {
+    const element = $element[0];
+    const rect = element.getBoundingClientRect();
+    const x = rect.left + Math.random() * rect.width;
+    const y = rect.top + Math.random() * rect.height;
+  cy.get('.k-hsv-gradient').click({ force: true })
+  cy.get('.k-coloreditor-apply').click()
+  cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
   
+
+
+})
+
+
 
 
 
