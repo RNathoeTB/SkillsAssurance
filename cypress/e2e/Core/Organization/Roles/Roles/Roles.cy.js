@@ -61,7 +61,7 @@ describe('Roles', () => {
     cy.contains('label', 'Main role').click();
     cy.contains('span.k-button-text', 'Save').click();
     cy.contains('div.svx-page-header-title', 'Role').should('exist');
-    //The new role is not added.
+    //The new role is added.
     cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).type('TestART');
     cy.wait(6000)
     cy.contains('TestART').should('exist')
@@ -75,7 +75,7 @@ describe('Roles', () => {
     cy.contains('span.k-button-text', 'Edit').click();
     
     cy.log('6. Select the newly created role and press \SAVE\'')
-    cy.get('input.k-input-inner').eq(3).type('A test'); // Replace 'Your Text Here' with the text you want to add
+    cy.get('input.k-input-inner').eq(3).type('A test'); 
     cy.wait(3000)
     cy.get('input.k-input-inner').eq(3).type('{enter}')
 
@@ -141,5 +141,55 @@ while (scrolledAmount <= maxScroll) {
 
 
   })
+  
+  it.only('Edit Role', () => {
+    cy.log('Double-click on a role')
+    //Add a role and delete later
+    const edit = 'roleEdit';
+    //cy.contains('span.k-button-text', 'Add').click();
+    //cy.get('input.k-input-inner').eq(0).type(edit);
+    //cy.get('input.k-input-inner').eq(1).type(edit);
+    //cy.contains('label', 'Main role').click();
+    //cy.contains('span.k-button-text', 'Save').click();
+    cy.contains('div.svx-page-header-title', 'Role').should('exist');
+    //The new role is added.
+    cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).type(edit);
+    cy.wait(6000)
+    cy.contains(edit).dblclick();
+
+    cy.log('Disable \'Active\'and click \'Save\' button')
+    cy.get('.k-switch-thumb').click()
+    cy.get('span.k-switch').should('have.attr', 'aria-checked', 'false');
+    cy.contains('span.k-button-text', 'Save').click();
+    cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).type(edit);
+    cy.wait(6000)
+    cy.contains(edit).should('not.exist')
+
+    cy.log('Navigate to Personnel > Employees and open any profile. Open the Organization tab and click \'EDIT\'. Open the related drop down based on the role type you made inactive (Main/Additional or Formal) and observe.')
+    cy.contains('span.k-item-text', 'Personnel').click(); 
+    cy.get('#tree-item-4_0 > .k-link > .k-item-text').click(); 
+    cy.get('.k-filter-row > [data-col-index="1"]').type('Rich Nath')
+    cy.get('.k-grid-content').contains('Rich Nathoe ()').click()
+    cy.get('.k-tabstrip-items').contains('Organization').click()
+    cy.contains('span.k-button-text', 'Edit').click();
+
+    cy.get('.svx-column-block-right > .svx-block > .svx-block-body > :nth-child(4)').within(() => {
+        cy.get('input[role="combobox"]').clear().type(edit.substring(0, 4));
+        cy.wait(3000)
+      });
+    cy.contains(edit).should('not.exist')
+
+
+
+
+
+
+    
+
+
+
+
+  })
+
   
   })
