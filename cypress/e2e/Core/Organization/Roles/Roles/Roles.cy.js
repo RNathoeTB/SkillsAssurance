@@ -247,7 +247,7 @@ while (scrolledAmount <= maxScroll) {
     cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).clear().type(edit);
     cy.wait(6000)
     cy.log('Bug')
-    //cy.contains('Additional role').should('exist')
+    cy.contains('Additional role').should('exist')
 
     //let edit = 'roleEditchange'
     cy.log('Navigate to Personnel > Employees and open any profile. Open the Organization tab and click \'EDIT\'. Open the \'Main role\' drop down and observe.')  
