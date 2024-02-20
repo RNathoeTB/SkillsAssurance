@@ -19,7 +19,7 @@ describe('Settings', () => {
   })
 
 
-it.only('Add Email Category', () => {
+it('Add Email Category', () => {
     cy.log('1. Observe the grid')
     cy.get('#tree-item-12 > .k-link > .k-item-text').click()
     cy.contains('Personnel settings').click()
@@ -108,16 +108,6 @@ it.only('Add Email Category', () => {
     cy.get(':nth-child(1) > .svx-panelbar-type-section > :nth-child(2) > .svx-formfield-content > .input-group').type('testauto@outlook.nl')
     cy.wait(2000)
     cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
-
-
-
-
-
-
-
-
-
-
 
 
   })

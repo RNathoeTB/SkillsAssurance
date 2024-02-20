@@ -9,7 +9,7 @@ describe('AddressCategories', () => {
     })
   
   
-  it.only('Add Address Category', () => {
+  it('Add Address Category', () => {
       cy.log('1. Observe the grid')
       cy.get('#tree-item-12 > .k-link > .k-item-text').click()
       cy.contains('Personnel settings').click()
