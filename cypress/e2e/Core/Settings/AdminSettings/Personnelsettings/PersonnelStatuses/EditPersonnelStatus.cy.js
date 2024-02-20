@@ -39,7 +39,7 @@ it.only('Edit Personnel Status', () => {
   cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').clear()
   cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').type('Testcase2385ART')
   cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
-  cy.wait(2000)
+  cy.wait(1000)
 // Pop-up closes.
   cy.get('.svx-modal-header > div').should('not.exist')
 // The new Name is visible in the grid in place of the old Name.
@@ -67,18 +67,30 @@ it.only('Edit Personnel Status', () => {
   cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Testcase2385ART')
   cy.get('.k-grid-content').should('contain', 'Testcase2385ART')
   cy.contains('Testcase2385ART').dblclick()
-
-  cy.get('[aria-label="Current selected color is "] > :nth-child(2)').click()
-  // cy.get(' .k-button > .telerik-blazor').eq(15).click()
+  cy.get(' .k-button > .telerik-blazor').eq(15).click()
   cy.get('.k-hsv-gradient').then($element => {
     const element = $element[0];
     const rect = element.getBoundingClientRect();
-    const x = rect.left + Math.random() * rect.width;
+    const x = rect.left + Math.random() * rect.width;   
     const y = rect.top + Math.random() * rect.height;
   cy.get('.k-hsv-gradient').click({ force: true })
   cy.get('.k-coloreditor-apply').click()
   cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
-  
+  cy.get('.svx-modal-header > div').should('not.exist') 
+
+
+
+  // The new color is visible in the grid.
+
+
+
+  cy.log('5. Look at \'Personnel status\' column of that record.')
+  cy.get('#tree-item-4 > .k-selected').click()
+  cy.get('#tree-item-4_0 > .k-link').click()  
+
+
+
+
 
 
 })
