@@ -18,11 +18,11 @@ describe('Roles', () => {
     cy.log('1. Observe the grid')
     cy.log('Bug: not alle colums are shown')
     cy.contains('span.k-column-title', 'Name').should('exist');
-    //cy.contains('span.k-column-title', 'Active').should('exist');
+    cy.contains('span.k-column-title', 'Active').should('exist');
     cy.contains('span.k-column-title', 'Code').should('exist');
-    //cy.contains('span.k-column-title', 'Main role').should('exist');
-    //cy.contains('span.k-column-title', 'Additional role').should('exist');
-    //cy.contains('span.k-column-title', 'Formal role').should('exist');
+    cy.contains('span.k-column-title', 'Main role').should('exist');
+    cy.contains('span.k-column-title', 'Additional role').should('exist');
+    cy.contains('span.k-column-title', 'Formal role').should('exist');
 
     cy.log('2. Click on \'ADD\' button')
     cy.contains('span.k-button-text', 'Add').click();
