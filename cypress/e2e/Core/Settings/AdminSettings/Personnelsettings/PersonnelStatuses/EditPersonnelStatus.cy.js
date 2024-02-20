@@ -12,11 +12,14 @@ beforeEach(() => {
   cy.get(':nth-child(3) > .svx-settings-container-body > :nth-child(3) > a').contains('Personnel settings').click()
   cy.get(' .k-link > .svx-font-2').eq(4).click()
   cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Testcase2385ART')
+  cy.wait(3000)
   cy.get('.k-grid-content').should('contain', 'Testcase2385ART')
   cy.contains('Testcase2385ART').dblclick()
 // Clear the existing text
-// Type the new text 'New Name'
+// Type another text than 'Testcase2385ART'
   cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').clear().type('Testcase2385')
+  cy.get('.k-checkbox-wrap').click()
+  
   cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
 
 })
@@ -26,6 +29,7 @@ it.only('Edit Personnel Status', () => {
   cy.get(':nth-child(3) > .svx-settings-container-body > :nth-child(3) > a').contains('Personnel settings').click()
   cy.get(' .k-link > .svx-font-2').eq(4).click()
   cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Testcase2385')
+  cy.wait(3000)
   cy.get('.k-grid-content').should('contain', 'Testcase2385')
   cy.contains('Testcase2385').dblclick()
 //'Personnel status' pop-up appears. It contains all of the prefilled data.
@@ -38,8 +42,9 @@ it.only('Edit Personnel Status', () => {
   cy.log('2. Change the \'Name\' field to another valid name. Click \'Save\'.')
   cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').clear()
   cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').type('Testcase2385ART')
+  cy.wait(3000)
   cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
-  cy.wait(1000)
+  cy.wait(3000)
 // Pop-up closes.
   cy.get('.svx-modal-header > div').should('not.exist')
 // The new Name is visible in the grid in place of the old Name.
@@ -47,6 +52,7 @@ it.only('Edit Personnel Status', () => {
   cy.get(':nth-child(3) > .svx-settings-container-body > :nth-child(3) > a').contains('Personnel settings').click()
   cy.get(' .k-link > .svx-font-2').eq(4).click()
   cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Testcase2385ART')
+  cy.wait(3000)
   cy.get('.k-grid-content').should('contain', 'Testcase2385ART')
   cy.contains('Testcase2385ART').dblclick()
 
@@ -57,6 +63,7 @@ it.only('Edit Personnel Status', () => {
   cy.get(':nth-child(3) > .svx-settings-container-body > :nth-child(3) > a').contains('Personnel settings').click()
   cy.get(' .k-link > .svx-font-2').eq(4).click()
   cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Testcase2385ART')
+  cy.wait(3000)
   cy.get('.k-grid-content').should('contain', 'Testcase2385ART')
   cy.get('.k-grid-content').contains('Testen RN')
 
@@ -65,6 +72,7 @@ it.only('Edit Personnel Status', () => {
   cy.get(':nth-child(3) > .svx-settings-container-body > :nth-child(3) > a').contains('Personnel settings').click()
   cy.get(' .k-link > .svx-font-2').eq(4).click()
   cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Testcase2385ART')
+  cy.wait(3000)
   cy.get('.k-grid-content').should('contain', 'Testcase2385ART')
   cy.contains('Testcase2385ART').dblclick()
   cy.get(' .k-button > .telerik-blazor').eq(15).click()
@@ -85,8 +93,34 @@ it.only('Edit Personnel Status', () => {
 
 
   cy.log('5. Look at \'Personnel status\' column of that record.')
-  cy.get('#tree-item-4 > .k-selected').click()
-  cy.get('#tree-item-4_0 > .k-link').click()  
+  cy.get('#tree-item-4 > .k-link > .telerik-blazor').click()
+  cy.get('#tree-item-4_0 > .k-link > .k-item-text').click()
+  // The edited Name and Color are present in the 'Personnel status' Column of that employee.
+  cy.get('[data-col-index="5"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Testcase2385ART')
+  cy.get('.k-grid-content').should('contain', 'Testcase2385ART')
+
+  cy.log('6. Navigate to Settings > Personnel settings > Personnel statuses. Open the same record again.')
+  // Uncheck the 'Active' checkbox. Click 'Save'
+  cy.get('#tree-item-12 > .k-link > .k-item-text').click()
+  cy.get(':nth-child(3) > .svx-settings-container-body > :nth-child(3) > a').contains('Personnel settings').click()
+  cy.get(' .k-link > .svx-font-2').eq(4).click()
+  cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Testcase2385ART')
+  cy.wait(3000)
+  cy.get('.k-grid-content').should('contain', 'Testcase2385ART')
+  cy.contains('Testcase2385ART').dblclick()
+  cy.pause()
+  cy.get('.k-checkbox-wrap').click()
+  cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
+  cy.wait(3000)
+  // Pop-up closes. In the 'Active' column of edited record, the 'Yes' value was changed to 'No'.
+  cy.get('.svx-modal-header > div').should('not.exist')
+  cy.get(' .k-link > .svx-font-2').eq(3).click()
+  cy.get(' .k-link > .svx-font-2').eq(4).click()
+  cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Testcase2385ART')
+  cy.wait(3000)
+  cy.get('.k-master-row > [data-col-index="2"]').should('contain', 'No')
+
+
 
 
 
