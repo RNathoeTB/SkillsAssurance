@@ -14,8 +14,9 @@ describe('Settings > Personnel settings', () => {
      cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').type('Status 1')
      cy.wait(1000)
      cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
-     
+
     })
+
     // Test data:
     // The following personnel status was already created:'Status 1'
 
@@ -32,7 +33,6 @@ describe('Settings > Personnel settings', () => {
     // 'Name' text field is highlighted as required.
      cy.get('input.k-input-inner[aria-invalid="true"]').should('exist')
     // On hover the following validation message is shown in tooltip:'Name is a required field' (not possible)
-
      cy.log('2. Enter the name that contains more than 255 characters (256 or more), click \'SAVE\'')
     const longName = 'A'.repeat(256); // Generating a string with length greater than 255
      cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').type(longName)
