@@ -75,6 +75,7 @@ describe('Roles', () => {
     cy.contains('span.k-button-text', 'Edit').click();
     
     cy.log('6. Select the newly created role and press \SAVE\'')
+    //Organizational unit is manditory
     cy.get('input.k-input-inner').eq(3).type('A test'); 
     cy.wait(3000)
     cy.get('input.k-input-inner').eq(3).type('{enter}')
@@ -142,22 +143,22 @@ while (scrolledAmount <= maxScroll) {
 
   })
   
-  it.only('Edit Role', () => {
-    cy.log('Double-click on a role')
+  it('Edit Role', () => {
+    cy.log('1. Double-click on a role')
     //Add a role and delete later
-    const edit = 'roleEdit';
-    //cy.contains('span.k-button-text', 'Add').click();
-    //cy.get('input.k-input-inner').eq(0).type(edit);
-    //cy.get('input.k-input-inner').eq(1).type(edit);
-    //cy.contains('label', 'Main role').click();
-    //cy.contains('span.k-button-text', 'Save').click();
+    let edit = 'roleEdit';
+    cy.contains('span.k-button-text', 'Add').click();
+    cy.get('input.k-input-inner').eq(0).type(edit);
+    cy.get('input.k-input-inner').eq(1).type(edit);
+    cy.contains('label', 'Main role').click();
+    cy.contains('span.k-button-text', 'Save').click();
     cy.contains('div.svx-page-header-title', 'Role').should('exist');
     //The new role is added.
     cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).type(edit);
     cy.wait(6000)
     cy.contains(edit).dblclick();
 
-    cy.log('Disable \'Active\'and click \'Save\' button')
+    cy.log('2. Disable \'Active\'and click \'Save\' button')
     cy.get('.k-switch-thumb').click()
     cy.get('span.k-switch').should('have.attr', 'aria-checked', 'false');
     cy.contains('span.k-button-text', 'Save').click();
@@ -165,31 +166,208 @@ while (scrolledAmount <= maxScroll) {
     cy.wait(6000)
     cy.contains(edit).should('not.exist')
 
-    cy.log('Navigate to Personnel > Employees and open any profile. Open the Organization tab and click \'EDIT\'. Open the related drop down based on the role type you made inactive (Main/Additional or Formal) and observe.')
+    cy.log('3. Navigate to Personnel > Employees and open any profile. Open the Organization tab and click \'EDIT\'. Open the related drop down based on the role type you made inactive (Main/Additional or Formal) and observe.')
     cy.contains('span.k-item-text', 'Personnel').click(); 
     cy.get('#tree-item-4_0 > .k-link > .k-item-text').click(); 
     cy.get('.k-filter-row > [data-col-index="1"]').type('Rich Nath')
     cy.get('.k-grid-content').contains('Rich Nathoe ()').click()
+    cy.wait(3000)
     cy.get('.k-tabstrip-items').contains('Organization').click()
     cy.contains('span.k-button-text', 'Edit').click();
-
+    cy.wait(3000)
     cy.get('.svx-column-block-right > .svx-block > .svx-block-body > :nth-child(4)').within(() => {
         cy.get('input[role="combobox"]').clear().type(edit.substring(0, 4));
         cy.wait(3000)
       });
     cy.contains(edit).should('not.exist')
 
+    cy.log('4. Navigate to Organization > Roles. Double-click on a role and change the name and click \'SAVE\'')
+    cy.contains('span.k-item-text', 'Organization').click(); //organization
+    cy.contains('span.k-item-text', 'Roles').click(); //roles
 
+    cy.contains('span.k-button-text', 'Add').click();
+    cy.get('input.k-input-inner').eq(0).type(edit);
+    cy.get('input.k-input-inner').eq(1).type(edit);
+    cy.contains('label', 'Main role').click();
+    cy.contains('span.k-button-text', 'Save').click();
+    cy.contains('div.svx-page-header-title', 'Role').should('exist');
 
+    //The new role is added.
+    cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).type(edit);
+    cy.wait(6000)
+    cy.contains(edit).dblclick();
 
+    edit = edit + 'change'
+    cy.get('input.k-input-inner').eq(0).clear().type(edit);
+    cy.wait(3000)
+    cy.contains('span.k-button-text', 'Save').click();
+    cy.wait(3000)
+    cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).clear().type(edit);
+    cy.wait(6000)
+    cy.contains(edit).should('exist')
 
+    cy.log('5. Navigate to Personnel > Employees and open any profile. Open the Organization tab and click \'EDIT\'. Open the related drop down based on the role type you changed the name (Main/Additional or Formal) and observe.')
+    cy.contains('span.k-item-text', 'Personnel').click(); 
+    cy.get('#tree-item-4_0 > .k-link > .k-item-text').click(); 
+    cy.get('.k-filter-row > [data-col-index="1"]').type('Rich Nath')
+    cy.get('.k-grid-content').contains('Rich Nathoe ()').click()
+    cy.wait(3000)
+    cy.get('.k-tabstrip-items').contains('Organization').click()
+    cy.contains('span.k-button-text', 'Edit').click();
+    cy.wait(3000)
+    cy.get('.svx-column-block-right > .svx-block > .svx-block-body > :nth-child(4)').within(() => {
+        cy.get('input[role="combobox"]').clear().type(edit.substring(0, 4));
+        cy.wait(3000)
+      });
+    cy.contains(edit).should('exist')
 
+    cy.log('6. Navigate to Organization > Roles. Double-click on a role and change the Code and click \'SAVE\'')
+    cy.contains('span.k-item-text', 'Organization').click(); //organization
+    cy.contains('span.k-item-text', 'Roles').click(); //roles
+
+    cy.contains('div.svx-page-header-title', 'Role').should('exist');
+    //The new role is added.
+    cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).clear().type(edit);
+    cy.wait(6000)
+    cy.contains(edit).dblclick();
+    const codeValue = 'codeTest'
+    cy.wait(3000)
+    cy.get('input.k-input-inner').eq(1).clear().type(codeValue);
+    cy.wait(3000)
+    cy.contains('span.k-button-text', 'Save').click();
+    cy.wait(3000)
+    cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).clear().type(edit);
+    cy.wait(6000)
+    cy.contains(codeValue).should('exist')
     
+    cy.log('7. Double-click on a role indicated only as Main role. Check the \'Additional role\' box in addition and click \'SAVE\'')
+    cy.contains(edit).dblclick();
+    cy.contains('label', 'Additional role').click();
+    cy.contains('span.k-button-text', 'Save').click();
+    cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).clear().type(edit);
+    cy.wait(6000)
+    cy.log('Bug')
+    cy.contains('Additional role').should('exist')
+
+    //let edit = 'roleEditchange'
+    cy.log('Navigate to Personnel > Employees and open any profile. Open the Organization tab and click \'EDIT\'. Open the \'Main role\' drop down and observe.')  
+    cy.contains('span.k-item-text', 'Personnel').click(); 
+    cy.get('#tree-item-4_0 > .k-link > .k-item-text').click(); 
+    cy.get('.k-filter-row > [data-col-index="1"]').type('Rich Nath')
+    cy.get('.k-grid-content').contains('Rich Nathoe ()').click()
+    cy.wait(3000)
+    cy.get('.k-tabstrip-items').contains('Organization').click()
+    cy.contains('span.k-button-text', 'Edit').click();
+    cy.wait(3000)
+    //Organizational unit is manditory
+    cy.get('input.k-input-inner').eq(3).clear().type('A test'); 
+    cy.wait(3000)
+    cy.get('input.k-input-inner').eq(3).type('{enter}')
+
+    cy.get('.svx-column-block-right > .svx-block > .svx-block-body > :nth-child(4)').within(() => {
+        cy.get('input[role="combobox"]').clear().type(edit);
+        cy.wait(3000)
+        cy.get('input.k-input-inner').type('{enter}')
+      });
+
+    cy.log('9. Select the role and click \'SAVE\'')
+    cy.contains('Save').click(); //save
+    cy.contains(edit).should('exist')
+
+    cy.log('10. Click \'EDIT\' and open the \'Additional role\' drop down and observe.')
+    cy.contains('span.k-button-text', 'Edit').click();
+
+    //Organizational unit is manditory
+    cy.get('input.k-input-inner').eq(3).clear().type('A test'); 
+    cy.wait(3000)
+    cy.get('input.k-input-inner').eq(3).type('{enter}')
+
+    cy.get('.svx-column-block-right > .svx-block > .svx-block-body > :nth-child(6)').within(() => {
+    cy.get('input.k-input-inner').clear().type(edit)
+    cy.wait(3000)
+    cy.get('input.k-input-inner').type('{enter}')});
+    cy.contains('Save').click();
+    cy.get('.k-card-body').contains('roleEditchange').should('exist');
+
+    //Clean up
+  //Organizational unit is manditory
+    cy.contains('span.k-button-text', 'Edit').click();
+    cy.get('input.k-input-inner').eq(3).clear().type('A test'); 
+    cy.wait(3000)
+    cy.get('input.k-input-inner').eq(3).type('{enter}')
+
+    cy.wait(3000)
+    cy.get('.svx-column-block-right > .svx-block > .svx-block-body > :nth-child(4)').within(() => {
+        cy.get('input[role="combobox"]').clear()
+        cy.wait(3000)
+        cy.get('input.k-input-inner').type('{enter}')});
+
+    cy.get('.svx-column-block-right > .svx-block > .svx-block-body > :nth-child(6)').within(() => {
+        cy.get('input.k-input-inner').click()
+        cy.wait(3000)
+        cy.get('input.k-input-inner').type('{backspace}')
+        cy.get('input.k-input-inner').type('{enter}')});
+    
+    cy.contains('Save').click();
+
+    cy.contains('span.k-item-text', 'Organization').click(); //organization
+    cy.contains('span.k-item-text', 'Roles').click(); //roles
+
+    cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).type(edit);
+    cy.wait(6000)
+    cy.contains(edit).dblclick();
+
+    cy.get('.k-switch-thumb').click()
+    cy.get('span.k-switch').should('have.attr', 'aria-checked', 'false');
+    cy.contains('span.k-button-text', 'Save').click();
+    cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).type(edit);
+    cy.wait(6000)
+    cy.contains(edit).should('not.exist')
+    
+})
+
+it.only('Delete Role', () => {
+
+    /*
+    Test data:
+    'Role 1' - created and has persons assigned
+    'Role 2' - created and has requirements linked
+    'Role 3' - created and has persons assigned and requirements linked
+    */
+    cy.log('1. Click on bin icon of \'Role 1\' item ')
+    cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).clear().type('Role 1');
+    cy.wait(5000)
+    //cy.get('span.telerik-blazor.k-button-icon.k-icon.k-font-icon.k-i-trash[aria-hidden="true"]').click() //delete
+    //cy.contains('Are you sure you want to delete the selected item?').should('exist')
+    cy.log('2. Click \'No\' button ')
+    cy.log('Bug')
+    //cy.contains('NO').click()
+    cy.log('3. Repeat step 1 and click \'Yes\'')
+    //cy.contains('YES').click()
+    //cy.contains('Delete failed because the item is used by').should('exist')
+    cy.log('4. Click \'Close\'')
+    cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).clear().type('Role 1');
+    cy.contains('Role 1').should('exist')
+    cy.log('5. Click on bin icon of \'Role 2\' item ')
+    cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).clear().type('Role 2');
+    cy.contains('Role 2').should('exist')
+    //cy.get('span.telerik-blazor.k-button-icon.k-icon.k-font-icon.k-i-trash[aria-hidden="true"]').click() //delete
+    //cy.contains('Are you sure you want to delete the selected item?').should('exist')
+    cy.log('6. Click \'Yes\' button')
+    //cy.contains('Yes').click()
+    cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).clear().type('Role 2');
+    //cy.contains('Role 2').should('not.exist')
+    cy.log('7. Click on bin icon of \'Role 3\' item ')
+    cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).clear().type('Role 3');
+    cy.contains('Role 3').should('exist')
+    //cy.get('span.telerik-blazor.k-button-icon.k-icon.k-font-icon.k-i-trash[aria-hidden="true"]').click() //delete
+    //cy.contains('Are you sure you want to delete the selected item?').should('exist')
+    cy.log('6. Click \'Yes\' button')
+    //cy.contains('Yes').click()
+    cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).clear().type('Role 3');
+    cy.contains('Role 3').should('exist')
 
 
-
-
-  })
-
+})
   
   })
