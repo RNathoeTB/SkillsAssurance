@@ -16,10 +16,9 @@ beforeEach(() => {
   cy.get('.k-grid-content').should('contain', 'Testcase2385ART')
   cy.contains('Testcase2385ART').dblclick()
 // Clear the existing text
-// Type another text than 'Testcase2385ART'
+// Type another text than 'Testcase2385ART' and unclick 'Active'status
   cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').clear().type('Testcase2385')
   cy.get('.k-checkbox-wrap').click()
-  
   cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
 
 })
@@ -108,7 +107,6 @@ it.only('Edit Personnel Status', () => {
   cy.wait(3000)
   cy.get('.k-grid-content').should('contain', 'Testcase2385ART')
   cy.contains('Testcase2385ART').dblclick()
-  cy.pause()
   cy.get('.k-checkbox-wrap').click()
   cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
   cy.wait(3000)
@@ -120,8 +118,20 @@ it.only('Edit Personnel Status', () => {
   cy.wait(3000)
   cy.get('.k-master-row > [data-col-index="2"]').should('contain', 'No')
 
+  // //  check 'Activate' status
+  // cy.log('Cleanup \'Testcase2385ART\'')
+  // cy.get('#tree-item-12 > .k-link > .k-item-text').click()
+  // cy.get(':nth-child(3) > .svx-settings-container-body > :nth-child(3) > a').contains('Personnel settings').click()
+  // cy.get(' .k-link > .svx-font-2').eq(4).click()
+  // cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Testcase2385ART')
+  // cy.wait(3000)
+  // cy.get('.k-grid-content').should('contain', 'Testcase2385ART')
+  // cy.contains('Testcase2385ART').dblclick()
+  // cy.get('.k-checkbox-wrap').click()
+  // cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
 
-
+  cy.log('7. Navigate to Settings > Personnel settings > Personnel statuses. Open the same record again.')
+  
 
 
 
