@@ -324,7 +324,50 @@ while (scrolledAmount <= maxScroll) {
     cy.wait(6000)
     cy.contains(edit).should('not.exist')
     
-  })
+})
 
+it.only('Delete Role', () => {
+
+    /*
+    Test data:
+    'Role 1' - created and has persons assigned
+    'Role 2' - created and has requirements linked
+    'Role 3' - created and has persons assigned and requirements linked
+    */
+    cy.log('1. Click on bin icon of \'Role 1\' item ')
+    cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).clear().type('Role 1');
+    cy.wait(5000)
+    //cy.get('span.telerik-blazor.k-button-icon.k-icon.k-font-icon.k-i-trash[aria-hidden="true"]').click() //delete
+    //cy.contains('Are you sure you want to delete the selected item?').should('exist')
+    cy.log('2. Click \'No\' button ')
+    cy.log('Bug')
+    //cy.contains('NO').click()
+    cy.log('3. Repeat step 1 and click \'Yes\'')
+    //cy.contains('YES').click()
+    //cy.contains('Delete failed because the item is used by').should('exist')
+    cy.log('4. Click \'Close\'')
+    cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).clear().type('Role 1');
+    cy.contains('Role 1').should('exist')
+    cy.log('5. Click on bin icon of \'Role 2\' item ')
+    cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).clear().type('Role 2');
+    cy.contains('Role 2').should('exist')
+    //cy.get('span.telerik-blazor.k-button-icon.k-icon.k-font-icon.k-i-trash[aria-hidden="true"]').click() //delete
+    //cy.contains('Are you sure you want to delete the selected item?').should('exist')
+    cy.log('6. Click \'Yes\' button')
+    //cy.contains('Yes').click()
+    cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).clear().type('Role 2');
+    //cy.contains('Role 2').should('not.exist')
+    cy.log('7. Click on bin icon of \'Role 3\' item ')
+    cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).clear().type('Role 3');
+    cy.contains('Role 3').should('exist')
+    //cy.get('span.telerik-blazor.k-button-icon.k-icon.k-font-icon.k-i-trash[aria-hidden="true"]').click() //delete
+    //cy.contains('Are you sure you want to delete the selected item?').should('exist')
+    cy.log('6. Click \'Yes\' button')
+    //cy.contains('Yes').click()
+    cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).clear().type('Role 3');
+    cy.contains('Role 3').should('exist')
+
+
+})
   
   })
