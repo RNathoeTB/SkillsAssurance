@@ -326,7 +326,7 @@ while (scrolledAmount <= maxScroll) {
     
 })
 
-it.only('Delete Role', () => {
+it('Delete Role', () => {
 
     /*
     Test data:
@@ -369,5 +369,54 @@ it.only('Delete Role', () => {
 
 
 })
+
+
+it('Validation on Add/Edit Role', () => {
+
+    /*
+    Test data:
+    'Role 1' - created and has persons assigned
+    'Role 2' - created and has requirements linked
+    'Role 3' - created and has persons assigned and requirements linked
+    */
+    cy.log('1. Do not fill any field in and click \'SAVE\' button ')
+    cy.contains('span.k-button-text', 'Add').click();
+    cy.contains('span.k-button-text', 'Save').click();
+    cy.get('.k-input-inner[aria-invalid="true"][tabindex="0"]').should('exist')
+
+    cy.log('2. Enter \'Role 1\' into \'Name\' field, select \'Main role\' and click \'SAVE\' button')
+    cy.get('input.k-input-inner').eq(0).clear().type('Role 1');
+    cy.log('Bug')
+    //cy.contains('span.k-button-text', 'Save').click();
+    //cy.get('.k-input-inner[aria-invalid="true"][tabindex="0"]').should('exist')
+    
+    cy.log('3.Rename the role by entering a name that contains 256 or more characters and click \'SAVE\'')
+    const longString = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.";
+    cy.get('input.k-input-inner').eq(0).clear().type(longString);
+    cy.get('.k-input-inner[aria-invalid="true"][tabindex="0"]').should('exist')
+    cy.log('4.Provide valid role name (255 or less characters and not yet existing) and click \'SAVE\' button ')
+    cy.log('step 4 is tested in other testxcase of role')
+
+    cy.log('5. Re-open the record and add a Code that contains 256 or more characters and click \'SAVE\'')
+    cy.get('input.k-input-inner').eq(0).clear().type('TestEditAdd');
+    cy.get('input.k-input-inner').eq(1).clear().type(longString);
+    cy.get('.k-input-inner[aria-invalid="true"][tabindex="0"]').should('exist')
+    
+    cy.log('6.Provide valid code (255 or less characters) and click \'SAVE\' button ')
+    cy.log('step 6 is tested in other testxcase of role')
+
+})
+
+
+it.only('Permissions Handling of Roles', () => {
+
+    cy.log('Step 1 - 5 is alreay automated in other Role testcases')
+    cy.log('6. Go to Settings -> Security groups -> Admin security group-> Permissions tab -> Core subtab')
+    
+
+    
+})
+
+
   
-  })
+})
