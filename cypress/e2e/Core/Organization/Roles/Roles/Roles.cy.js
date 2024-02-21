@@ -393,6 +393,7 @@ it('Validation on Add/Edit Role', () => {
     cy.log('3.Rename the role by entering a name that contains 256 or more characters and click \'SAVE\'')
     const longString = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.";
     cy.get('input.k-input-inner').eq(0).clear().type(longString);
+    cy.contains('span.k-button-text', 'Save').click();
     cy.get('.k-input-inner[aria-invalid="true"][tabindex="0"]').should('exist')
     cy.log('4.Provide valid role name (255 or less characters and not yet existing) and click \'SAVE\' button ')
     cy.log('step 4 is tested in other testxcase of role')
@@ -400,6 +401,8 @@ it('Validation on Add/Edit Role', () => {
     cy.log('5. Re-open the record and add a Code that contains 256 or more characters and click \'SAVE\'')
     cy.get('input.k-input-inner').eq(0).clear().type('TestEditAdd');
     cy.get('input.k-input-inner').eq(1).clear().type(longString);
+    cy.contains('span.k-button-text', 'Save').click();
+
     cy.get('.k-input-inner[aria-invalid="true"][tabindex="0"]').should('exist')
     
     cy.log('6.Provide valid code (255 or less characters) and click \'SAVE\' button ')
@@ -408,12 +411,167 @@ it('Validation on Add/Edit Role', () => {
 })
 
 
-it.only('Permissions Handling of Roles', () => {
-
+it('Permissions Handling of Roles', () => {
     cy.log('Step 1 - 5 is alreay automated in other Role testcases')
     cy.log('6. Go to Settings -> Security groups -> Admin security group-> Permissions tab -> Core subtab')
-    
+    cy.contains('span.k-item-text', 'Settings').click()
+    cy.contains('div', 'Security groups').click()
+    cy.contains('td[role="gridcell"]', 'Admin settings').dblclick()
+    cy.contains('span.svx-font-2', 'Permissions').click()
+    cy.contains('span.svx-font-2', 'Core').click()
 
+    cy.get('div.svx-crud-permission-selector')
+    .contains('Roles')
+    .parent() // Go up to the parent of the element containing "Set all"
+    .within(() => {
+      cy.contains('View').should('exist'); // Check if "View" exists within the parent
+      cy.contains('Delete').should('exist'); // Check if "Delete" exists within the parent
+      cy.contains('Update').should('exist'); // Check if "Update" exists within the parent
+      cy.contains('Create').should('exist'); // Check if "Create" exists within the parent
+    });
+
+    cy.log('7. Unselect \'Delete\' and click \'SAVE\' button')
+    cy.get('div.svx-crud-permission-selector')
+    .contains('Roles')
+    .parent() // Go up to the parent of the element containing "Set all"
+    .within(() => {
+      cy.get('button').contains('Delete').then(($button) => {
+        if ($button.attr('aria-pressed') === 'false') {
+          cy.contains('Delete').click(); // Click on "Delete" if aria-pressed is false
+        }
+      });
+    });
+    cy.contains('Save').click()
+
+    cy.log('8. Re-login and navigate to the Roles overview')
+    cy.get('.profile-picture').click()
+    cy.log('2. Click on Logout option')
+    cy.contains('Logout').click();
+    cy.contains('Welcome back').should('be.visible')
+    cy.wait(3000)
+    cy.get('#Username').type('Richard')
+    cy.get('#Password').type('Nathoe')
+    cy.get('#Login').click()
+    cy.contains('Dashboard').should('be.visible')
+    cy.contains('span.k-item-text', 'Organization').click(); //organization
+    cy.contains('span.k-item-text', 'Roles').click(); //roles
+    cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).type('Main Role ()');
+    cy.wait(3000);
+    cy.log('bug')
+    //cy.get('span.telerik-blazor.k-button-icon.k-icon.k-font-icon.k-i-trash').should('not.exist');
+    cy.contains('span.k-button-text', 'Add').should('exist')
+
+    cy.log('step 9 - 10 is automated in other testcase')
+    
+    cy.log('11. Go to Settings -> Security groups -> Admin security group-> Permissions tab -> Core subtab and for Roles unselect \'Create\' and click \'SAVE\'')
+    cy.contains('span.k-item-text', 'Settings').click()
+    cy.contains('div', 'Security groups').click()
+    cy.contains('td[role="gridcell"]', 'Admin settings').dblclick()
+    cy.contains('span.svx-font-2', 'Permissions').click()
+    cy.contains('span.svx-font-2', 'Core').click()
+    cy.get('div.svx-crud-permission-selector')
+    .contains('Roles')
+    .parent() // Go up to the parent of the element containing "Set all"
+    .within(() => {
+      cy.get('button').contains('Create').then(($button) => {
+        if ($button.attr('aria-pressed') === 'false') {
+          cy.contains('Create').click(); // Click on "Delete" if aria-pressed is false
+        }
+      });
+    });
+    cy.contains('Save').click()
+
+    cy.log('12. Re-login and navigate to the Roles overview')
+    cy.get('.profile-picture').click()
+    cy.contains('Logout').click();
+    cy.contains('Welcome back').should('be.visible')
+    cy.wait(3000)
+    cy.get('#Username').type('Richard')
+    cy.get('#Password').type('Nathoe')
+    cy.get('#Login').click()
+    cy.contains('Dashboard').should('be.visible')
+    cy.contains('span.k-item-text', 'Organization').click(); //organization
+    cy.contains('span.k-item-text', 'Roles').click(); //roles
+    cy.wait(3000);
+    cy.log('bug')
+    //cy.get('span.telerik-blazor.k-button-icon.k-icon.k-font-icon.k-i-trash').should('not.exist');
+    //cy.contains('span.k-button-text', 'Add').should('not.exist')
+    
+    cy.log('13 is already automated in other testcase')
+
+    cy.log('14. Go to Settings -> Security groups -> Admin security group-> Permissions tab -> Core subtab and for Roles unselect \'Update\' and click \'SAVE\'')
+    cy.contains('span.k-item-text', 'Settings').click()
+    cy.contains('div', 'Security groups').click()
+    cy.contains('td[role="gridcell"]', 'Admin settings').dblclick()
+    cy.contains('span.svx-font-2', 'Permissions').click()
+    cy.contains('span.svx-font-2', 'Core').click()
+    cy.get('div.svx-crud-permission-selector')
+    .contains('Roles')
+    .parent() // Go up to the parent of the element containing "Set all"
+    .within(() => {
+      cy.get('button').contains('Update').then(($button) => {
+        if ($button.attr('aria-pressed') === 'false') {
+          cy.contains('Update').click(); // Click on "Delete" if aria-pressed is false
+        }
+      });
+    });
+    cy.contains('Save').click()
+
+    cy.log('15. Re-login and navigate to the Roles overview')
+    cy.get('.profile-picture').click()
+    cy.contains('Logout').click();
+    cy.contains('Welcome back').should('be.visible')
+    cy.wait(3000)
+    cy.get('#Username').type('Richard')
+    cy.get('#Password').type('Nathoe')
+    cy.get('#Login').click()
+    cy.contains('Dashboard').should('be.visible')
+    cy.contains('span.k-item-text', 'Organization').click(); //organization
+    cy.contains('span.k-item-text', 'Roles').click(); //roles
+    cy.wait(3000);
+    cy.log('bug')
+    //cy.get('span.telerik-blazor.k-button-icon.k-icon.k-font-icon.k-i-trash').should('not.exist');
+    //cy.contains('span.k-button-text', 'Add').should('not.exist')
+
+    cy.log('16. Double-click on any record and observe')
+    cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).type('Role');
+    cy.wait(3000);
+    cy.contains('Role 1').dblclick();
+    cy.log('Bug')
+    //cy.get('input.k-input-inner').eq(0).should('have.attr', 'readonly', 'true');
+
+    cy.log('17. Go to Settings -> Security groups -> Admin security group-> Permissions tab -> Core subtab and for Roles unselect \'View\' and click \'SAVE\'')
+    cy.contains('span.k-item-text', 'Settings').click()
+    cy.contains('div', 'Security groups').click()
+    cy.contains('td[role="gridcell"]', 'Admin settings').dblclick()
+    cy.contains('span.svx-font-2', 'Permissions').click()
+    cy.contains('span.svx-font-2', 'Core').click()
+    cy.get('div.svx-crud-permission-selector')
+    .contains('Roles')
+    .parent() // Go up to the parent of the element containing "Set all"
+    .within(() => {
+      cy.get('button').contains('View').then(($button) => {
+        if ($button.attr('aria-pressed') === 'false') {
+          cy.contains('View').click(); // Click on "Delete" if aria-pressed is false
+        }
+      });
+    });
+    cy.contains('Save').click()
+
+    cy.log('18. Re-login and navigate to the Roles overview')
+    cy.get('.profile-picture').click()
+    cy.contains('Logout').click();
+    cy.contains('Welcome back').should('be.visible')
+    cy.wait(3000)
+    cy.get('#Username').type('Richard')
+    cy.get('#Password').type('Nathoe')
+    cy.get('#Login').click()
+    cy.contains('Dashboard').should('be.visible')
+    cy.contains('span.k-item-text', 'Organization').click(); //organization
+    cy.contains('span.k-item-text', 'Roles').click(); //roles
+    cy.wait(3000);
+    cy.log('bug')
+    //cy.contains('.k-tabstrip-items > .k-tabstrip-item > .k-link > .svx-font-2', 'Roles').should('not.exist')
     
 })
 
