@@ -494,8 +494,8 @@ it('Permissions Handling of Roles', () => {
     cy.contains('span.k-item-text', 'Roles').click(); //roles
     cy.wait(3000);
     cy.log('bug')
-    //cy.get('span.telerik-blazor.k-button-icon.k-icon.k-font-icon.k-i-trash').should('not.exist');
-    //cy.contains('span.k-button-text', 'Add').should('not.exist')
+    cy.get('span.telerik-blazor.k-button-icon.k-icon.k-font-icon.k-i-trash').should('not.exist');
+    cy.contains('span.k-button-text', 'Add').should('not.exist')
     
     cy.log('13 is already automated in other testcase')
 
@@ -530,15 +530,15 @@ it('Permissions Handling of Roles', () => {
     cy.contains('span.k-item-text', 'Roles').click(); //roles
     cy.wait(3000);
     cy.log('bug')
-    //cy.get('span.telerik-blazor.k-button-icon.k-icon.k-font-icon.k-i-trash').should('not.exist');
-    //cy.contains('span.k-button-text', 'Add').should('not.exist')
+    cy.get('span.telerik-blazor.k-button-icon.k-icon.k-font-icon.k-i-trash').should('not.exist');
+    cy.contains('span.k-button-text', 'Add').should('not.exist')
 
     cy.log('16. Double-click on any record and observe')
     cy.get('input.k-input-inner[aria-readonly="false"][tabindex="-1"]').eq(0).type('Role');
     cy.wait(3000);
     cy.contains('Role 1').dblclick();
     cy.log('Bug')
-    //cy.get('input.k-input-inner').eq(0).should('have.attr', 'readonly', 'true');
+    cy.get('input.k-input-inner').eq(0).should('have.attr', 'readonly', 'true');
 
     cy.log('17. Go to Settings -> Security groups -> Admin security group-> Permissions tab -> Core subtab and for Roles unselect \'View\' and click \'SAVE\'')
     cy.contains('span.k-item-text', 'Settings').click()
@@ -571,7 +571,7 @@ it('Permissions Handling of Roles', () => {
     cy.contains('span.k-item-text', 'Roles').click(); //roles
     cy.wait(3000);
     cy.log('bug')
-    //cy.contains('.k-tabstrip-items > .k-tabstrip-item > .k-link > .svx-font-2', 'Roles').should('not.exist')
+    cy.contains('.k-tabstrip-items > .k-tabstrip-item > .k-link > .svx-font-2', 'Roles').should('not.exist')
     
 })
 
