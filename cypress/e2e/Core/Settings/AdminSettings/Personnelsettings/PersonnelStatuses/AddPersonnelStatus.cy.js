@@ -17,7 +17,6 @@ describe('Settings > Personnel settings', () => {
    cy.get('.k-button-solid-primary').click()
   })
   
-
   it.only('Add Personnel Status', () => {
    cy.log('1. Observe the grid')
     // The grid consists of columns:
@@ -101,40 +100,20 @@ describe('Settings > Personnel settings', () => {
    cy.get('.k-tabstrip-item:contains("Organization")').click()
    cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
   //  The newly created item is available for selection
-  
    cy.log('7. Select the newly created status and press \'SAVE\' ')
-   cy.get('.svx-column-block-right > .svx-block > .svx-block-body > :nth-child(1) > .svx-formfield-content')
-   .find('input.k-input-inner').clear().type('TestBoticsRN').get('.k-list-container') // Assuming this is the container for the dropdown list
-   .should('be.visible') // Ensure the dropdown list is visible
-   .then(() => {
-     let found = false;
-     cy.get('body').type('{downarrow}'); // Press down arrow to start navigating through the list
-     cy.get('.k-list-item').each(($item) => { // Iterate through each item in the list
-       if ($item.text().includes('TestBoticsRN')) { // Check if the item contains the desired text
-         found = true;
-         cy.wrap($item).click(); // Click on the item if found
-       } 
-     });
-   })
-   cy.get('.svx-column-block-left > :nth-child(1) > .svx-block-body > :nth-child(4) > .svx-formfield-content')
-   .find('input.k-input-inner')
-   .clear()
-   .type('NM Organisational Unit Spain')
-   .get('.k-list-container') // Assuming this is the container for the dropdown list
-   .should('be.visible') // Ensure the dropdown list is visible
-   .then(() => {
-     cy.get('body').type('{downarrow}'); // Press down arrow to start navigating through the list
-     cy.get('.k-list-item').contains('NM Organisational Unit Spain').click(); // Click on the item
-   })
-  //  The status is stored within the profile.
+   cy.get('.svx-column-block-right > .svx-block > .svx-block-body > :nth-child(1) > .svx-formfield-content').find('input.k-input-inner').clear().type('TestBoticsRN').wait(3000).type('{enter}')
+   cy.get('.svx-column-block-left > :nth-child(1) > .svx-block-body > :nth-child(4) > .svx-formfield-content').find('input.k-input-inner').clear().type('NM Organisational Unit Europe').wait(3000).type('{enter}')
    cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
-   cy.get('.svx-column-block-right > .svx-block > .svx-block-body > :nth-child(1) > .k-card > .k-card-body').should('contain', 'TestBoticsRN')
-
+   cy.wait(3000)
+  //  The status is stored within the profile.
+   cy.get('.svx-column-block-right > .svx-block > .svx-block-body > :nth-child(1) > .k-card > .k-card-body').contains('TestBoticsRN')
+  
    cy.log('8. Click \'CANCEL\' and observe ')
    cy.get('.modal-buttons > :nth-child(1) > .telerik-blazor').click()
   //  The user is redirected to the Employees overview grid.
   // The status is correctly shown in the Personnel status column, including color indication. 
-   cy.get('[data-col-index="5"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('TestBoticsRN')
+   cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Rich Nathoe')
+   cy.wait(1000) 
    cy.get('.k-master-row > [data-col-index="5"]').should('contain', 'TestBoticsRN')
 
    
