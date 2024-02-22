@@ -11,12 +11,12 @@ describe('Settings > Personnel settings', () => {
      cy.get(':nth-child(3) > .svx-settings-container-body > :nth-child(3) > a').contains('Personnel settings').click()
      cy.get('.k-tabstrip-items').contains('Personnel statuses').click()
      cy.get('.svx-button > .telerik-blazor').click()
-     cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').type('Status 1')
+     cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').clear().type('Status 1')
      cy.wait(2000)
      cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
      cy.wait(2000)
      cy.get('.svx-button > .telerik-blazor').click()
-     cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').type('Status 2')
+     cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').clear().type('Status 2')
      cy.wait(1000)
      cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
 
@@ -24,8 +24,8 @@ describe('Settings > Personnel settings', () => {
      cy.get('#tree-item-4 > .k-link > .telerik-blazor').click()
      cy.get('#tree-item-4_0 > .k-link > .k-item-text') .click()
      //  open an Employee profile (with already a status)
-     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Ritchie Nathoe')
-     cy.wait(1000)
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').clear().type('Ritchie Nathoe ()')
+     cy.wait(4000)
      cy.get('.k-grid-content').should('contain', 'Ritchie Nathoe').contains('Ritchie Nathoe ()').click()
      //  within the Organization tab, click \'EDIT\' and open the Personnel status drop down
      cy.wait(3000)
@@ -47,7 +47,7 @@ describe('Settings > Personnel settings', () => {
      cy.get('#tree-item-12 > .k-link > .k-item-text').click()
      cy.get(':nth-child(3) > .svx-settings-container-body > :nth-child(3) > a').contains('Personnel settings').click()
      cy.get('.k-tabstrip-items').contains('Personnel statuses').click()
-     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Status 1')
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').clear().type('Status 1')
      cy.wait(2000)
      cy.get('.k-grid-content').contains('Status 1')
      cy.get('.k-master-row > [data-col-index="1"]').contains('Status 1')
@@ -59,10 +59,10 @@ describe('Settings > Personnel settings', () => {
      cy.log('2. Click \'YES\' button')
     //  YES button not available. using OK
     //  cy.get('.k-button-solid-primary').click()
-    // The validation pop-up dialog is opened with the following message:
-    // Delete failed because the item is used by:
-    // Employees: '%Employee full name%'
+    // The validation pop-up dialog is opened with the following message:Delete failed because the item is used by: Ritchie Nathoe
+    // cy.contains(' cy.contains(' Are you sure you want to delete the selected item?').should('exist')').should('exist')
     // 'CLOSE' button is present
+
 
      cy.log('3. Click \'CLOSE\' button ')
     // The validation pop-up dialog is opened with the following message:
@@ -97,14 +97,24 @@ describe('Settings > Personnel settings', () => {
      cy.get('.k-grid-content').contains(' No items to display')
 
      cy.log('7. Click on \'ADD\' button and enter previously deleted status name, SAVE ')
+     cy.pause()
      cy.get('.svx-button > .telerik-blazor').click()
      cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').type('Status 2')
-     cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
+     cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click().wait(2000)
      //  The status item is successfully created and added to the grid list.
      cy.get(' .k-link > .svx-font-2').eq(3).click()
      cy.get(' .k-link > .svx-font-2').eq(4).click()
      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').clear().type('Status 2')
      cy.get('.k-grid-content').contains('Status 2')
+
+     cy.log('CLEANUP')
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').wait(2000).clear().type('Status 1')
+     cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
+     cy.get('.k-button-solid-primary').click()
+
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').clear().type('Status 2')
+     cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
+     cy.get('.k-button-solid-primary').click()
 
 
 
