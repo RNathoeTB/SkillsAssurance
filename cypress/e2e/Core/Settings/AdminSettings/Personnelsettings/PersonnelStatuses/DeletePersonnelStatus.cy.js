@@ -55,9 +55,9 @@ describe('Settings > Personnel settings', () => {
 
      cy.log('2. Click \'YES\' button')
     //  YES button not available. using OK
-    //  cy.get('.k-button-solid-primary').click()
+     cy.get('.k-button-solid-primary').click()
     // The validation pop-up dialog is opened with the following message:Delete failed because the item is used by: Ritchie Nathoe
-    // cy.contains(' cy.contains(' Are you sure you want to delete the selected item?').should('exist')').should('exist')
+     cy.contains(' Are you sure you want to delete the selected item?').should('exist')
     // 'CLOSE' button is present
 
      cy.log('3. Click \'CLOSE\' button ')
