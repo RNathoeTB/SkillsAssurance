@@ -50,7 +50,6 @@ describe('Settings > Personnel settings', () => {
         });
     });
 });
-
      // 'ADD' button is present.
      cy.get('.svx-button > .telerik-blazor').should('exist')
      cy.log('2. Click \'ADD\', fill all required fields and click \'SAVE\'')
@@ -121,7 +120,7 @@ cy.log('BUG: \'NO\'/\'YES\' buttons available. > CANCEL & OK is available ')
       // If aria-pressed is already false, no action is needed
     }
   })
-     cy.get('#blazor-error-ui').click()
+  cy.get('a.dismiss').click()
      cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
      // The edit security group dialog is closed.
      // 'Save successful' notification message is shown.
@@ -255,6 +254,7 @@ cy.log('BUG, ADD and Bin icons are available ')
      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').clear().type('TC1284RNTESTchange')
      cy.wait(2000)
      cy.get('.k-master-row > [data-col-index="1"]').dblclick().wait(1000)
+     cy.get('.svx-modal-buttons > :nth-child(1) > .telerik-blazor').click()
      cy.log('BUG, All fields are editable ')
 
      cy.log('17. Go to Settings -> Security groups -> Admin security group-> Permissions tab -> Core subtab and for Personnel statuses unselect \'View\' and click \'SAVE\'')
@@ -289,6 +289,12 @@ cy.log('BUG, "An unhandled error has occurred. Reload" message is shown')
     //  'Personnel statuses' on tabs strip menu is no longer available.
 cy.log('BUG: Personnel statuses on tabs strip menu is STILL available')
     //  cy.get('.k-tabstrip-items').should('not.contain', 'Personnel statuses')
-
+     
+cy.log('cleanup: Delete Personnel Status') 
+    cy.get('.k-tabstrip-items').contains('Personnel statuses').click()
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').clear().type('TC1284RNTESTchangestep13')
+     cy.wait(2000)
+     cy.get('[data-render-row-index="2"] > [data-col-index="0"] > .k-button > .telerik-blazor').click()
+     cy.get('.k-button-solid-primary').click()
     })   
 })
