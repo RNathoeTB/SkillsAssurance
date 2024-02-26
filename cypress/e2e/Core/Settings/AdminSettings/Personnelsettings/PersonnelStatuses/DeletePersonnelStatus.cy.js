@@ -4,7 +4,7 @@ describe('Settings > Personnel settings', () => {
      cy.log('Login')
      // Bijvoorbeeld: inloggen voordat elke test wordt uitgevoerd
      cy.get('#Username').type('Richard')
-     cy.get('#Password').type('Nathoe')
+     cy.get('#Password').type('Test123')
      cy.get('#Login').click()
      // Test data:
      // 'Status 1' - is defined at list for 1 employee
@@ -25,9 +25,9 @@ describe('Settings > Personnel settings', () => {
      cy.get('#tree-item-4 > .k-link > .telerik-blazor').click()
      cy.get('#tree-item-4_0 > .k-link > .k-item-text') .click()
      //  open an Employee profile (with already a status)
-     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').clear().type('Ritchie Nathoe')
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').clear().type('Ritchie Test123')
      cy.wait(2000)
-     cy.get('.k-grid-content').contains('Ritchie Nathoe').click()
+     cy.get('.k-grid-content').contains('Ritchie Test123').click()
      //  within the Organization tab, click \'EDIT\' and open the Personnel status drop down
      cy.wait(3000)
      cy.get('.k-tabstrip-item:contains("Organization")').click()
@@ -56,7 +56,7 @@ describe('Settings > Personnel settings', () => {
      cy.log('2. Click \'YES\' button')
     //  YES button not available. using OK
      cy.get('.k-button-solid-primary').click()
-    // The validation pop-up dialog is opened with the following message:Delete failed because the item is used by: Ritchie Nathoe
+    // The validation pop-up dialog is opened with the following message:Delete failed because the item is used by: Ritchie Test123
      cy.contains(' Are you sure you want to delete the selected item?').should('exist')
     // 'CLOSE' button is present
 

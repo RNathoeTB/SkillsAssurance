@@ -4,7 +4,7 @@ describe('AddressCategories', () => {
       cy.log('Login')
       // Bijvoorbeeld: inloggen voordat elke test wordt uitgevoerd
       cy.get('#Username').type('Richard')
-      cy.get('#Password').type('Nathoe')
+      cy.get('#Password').type('Test123')
       cy.get('#Login').click()  
     })
   
@@ -92,9 +92,9 @@ describe('AddressCategories', () => {
       //cy.get('[data-render-row-index="2"] > [data-col-index="1"] > .span-nav').click()
       //cy.get('.k-tabstrip-items').contains('Details') 
 
-      cy.get('.k-filter-row > [data-col-index="1"]').type('Rich Nathoe ()')
+      cy.get('.k-filter-row > [data-col-index="1"]').type('Rich Test123 ()')
       cy.wait(3000)
-      cy.get('.k-grid-content').contains('Rich Nathoe ()').click()
+      cy.get('.k-grid-content').contains('Rich Test123 ()').click()
       cy.get('.k-tabstrip-items').contains('Details').click()
 
       cy.log('9. Click \'EDIT\' button and on \'Contact info\' section expand \'Address(es)\'. Click on the \'Add address\' link and open the \'Category\' drop down.')

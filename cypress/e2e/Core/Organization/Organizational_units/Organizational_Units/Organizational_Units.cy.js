@@ -4,7 +4,7 @@ describe('Roles', () => {
       cy.log('Login')
       // Bijvoorbeeld: inloggen voordat elke test wordt uitgevoerd
       cy.get('#Username').clear().type('Richard')
-      cy.get('#Password').clear().type('Nathoe')
+      cy.get('#Password').clear().type('Test123')
       cy.get('#Login').click()  
 
       cy.log('Entry point:Manage Section -> Organization > Organizational Units')
@@ -102,7 +102,7 @@ describe('Roles', () => {
       cy.contains('span.k-item-text', 'Personnel').click(); 
       cy.get('#tree-item-4_0 > .k-link > .k-item-text').click(); 
       cy.get('.k-filter-row > [data-col-index="1"]').clear().type('Rich Nath')
-      cy.get('.k-grid-content').contains('Rich Nathoe ()').click()
+      cy.get('.k-grid-content').contains('Rich Test123 ()').click()
       cy.wait(3000)
       cy.get('.k-tabstrip-items').contains('Organization').click()
       cy.contains('span.k-button-text', 'Edit').click();
