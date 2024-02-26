@@ -36,7 +36,6 @@ describe('Settings > Personnel settings', () => {
 
      // 'ADD' button is present.
      cy.get('.svx-button > .telerik-blazor').should('exist')
-
      cy.log('2. Click \'ADD\', fill all required fields and click \'SAVE\'')
      cy.get('.svx-button > .telerik-blazor').click()
      cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').clear().type('TC1284Permissions')
@@ -83,7 +82,7 @@ cy.log('\'NO\'/\'YES\' buttons available. BUG >>>>>>>>>> CANCEL & OK is availabl
      cy.log('6. Go to Settings -> Security groups -> Admin security group-> Permissions tab -> Core sub-tab')
      cy.get('#tree-item-12 > .k-link').click()
      cy.get(':nth-child(1) > .svx-settings-container-body > :nth-child(2) > a > div').click()
-     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Admin settings').wait(2000)
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Admin settings').wait(3000)
      cy.get('[data-render-row-index="2"] > [data-col-index="1"]').contains('Admin settings').dblclick()
      cy.wait(2000)
      cy.get('.k-link > .svx-font-2').eq(1).click()
@@ -97,24 +96,31 @@ cy.log('\'NO\'/\'YES\' buttons available. BUG >>>>>>>>>> CANCEL & OK is availabl
         cy.contains('Delete').should('exist');
     })
      cy.log('7. Unselect \'Delete\' and click \'SAVE\' button')
-     cy.get(':nth-child(4) > .svx-permission-block-body > :nth-child(7) > .right-column > .k-button-group > .k-group-end').click()
+     cy.get(':nth-child(4) > .svx-permission-block-body > :nth-child(7) > .right-column > .k-button-group > .k-group-end')
+     .invoke('attr', 'aria-pressed').then(ariaPressed => {
+     if (ariaPressed === 'true') {
+      cy.get(':nth-child(4) > .svx-permission-block-body > :nth-child(7) > .right-column > .k-button-group > .k-group-end').click();
+    } else {
+      // If aria-pressed is already false, no action is needed
+    }
+  })
      cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
      // The edit security group dialog is closed.
      // 'Save successful' notification message is shown.
 cy.log('BUG, "An unhandled error has occurred. Reload" message is shown')
       
-    //  cy.log('8. Re-login and navigate to the Personnel statuses overview')
-    //  cy.get('.profile-picture').click()
-    //  cy.contains('logout').click()
-    //  cy.get('#Username').type('Richard')
-    //  cy.get('#Password').type('Nathoe')
-    //  cy.get('#Login').click()
+     cy.log('8. Re-login and navigate to the Personnel statuses overview')
+     cy.get('.profile-picture').click()
+     cy.contains('Logout').click()
+     cy.get('#Username').type('Richard')
+     cy.get('#Password').type('Test123')
+     cy.get('#Login').click()
      cy.get('#tree-item-12 > .k-link > .k-item-text').click()
      cy.get(':nth-child(3) > .svx-settings-container-body > :nth-child(3) > a').contains('Personnel settings').click()
      cy.get('.k-tabstrip-items').contains('Personnel statuses').click()
      //  User is not able to remove grid records.
      //  Bin icons are not available. 'ADD' button is available.
-     cy.log('BUG, records can be deleted, Bin icons are available ')
+cy.log('ADD and Bin icons are available ')
 
      cy.log('9. Click \'ADD\', fill all required fields and click \'SAVE\'')
      cy.get('.svx-button > .telerik-blazor').click()
@@ -129,11 +135,12 @@ cy.log('BUG, "An unhandled error has occurred. Reload" message is shown')
      cy.get('.k-tabstrip-items').contains('Personnel statuses').click()
      //  The grid list is updated with newly created item.
      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper').type('TC1284RNTEST')
+     cy.wait(2000)
      cy.get('.k-grid-content').should('contain', 'TC1284RNTEST')
 
-      
-     cy.get('.k-master-row > [data-col-index="1"]').dblclick()
-     cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').type('TC1284RNTESTchange')
+     cy.log('10. Double-click on the just added record and change the name and click \'SAVE\'') 
+     cy.get('.k-master-row > [data-col-index="1"]').dblclick().wait(1000)
+     cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').clear().type('TC1284RNTESTchange')
      cy.wait(1000)
      cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
      //  The user is redirected to the 'Personnel statuses' overview screen
@@ -144,20 +151,53 @@ cy.log('BUG, "An unhandled error has occurred. Reload" message is shown')
      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper').type('TC1284RNTESTchange')
      cy.get('.k-grid-content').should('contain', 'TC1284RNTESTchange')
      
-     cy.log('10. Go to Settings -> Security groups -> Admin security group-> Permissions tab -> Core subtab and for Personnel statuses unselect \'Create\' and click \'SAVE\'')
+     cy.log('11. Go to Settings -> Security groups -> Admin security group-> Permissions tab -> Core subtab and for Personnel statuses unselect \'Create\' and click \'SAVE\'')
      cy.get('#tree-item-12 > .k-link').click()
      cy.get(':nth-child(1) > .svx-settings-container-body > :nth-child(2) > a > div').click()
-     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Admin settings').wait(2000)
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Admin settings').wait(3000)
      cy.get('[data-render-row-index="2"] > [data-col-index="1"]').contains('Admin settings').dblclick()
      cy.wait(2000)
      cy.get('.k-link > .svx-font-2').eq(1).click()
      cy.get('.k-link > .svx-font-2').eq(5).click()
-     
+     cy.get(':nth-child(4) > .svx-permission-block-body > :nth-child(7) > .right-column').contains('.telerik-blazor', 'Create')
+     .invoke('attr', 'aria-pressed').then(ariaPressed => {
+     if (ariaPressed === 'true') {
+     cy.get(':nth-child(4) > .svx-permission-block-body > :nth-child(7) > .right-column').contains('.telerik-blazor', 'Create').click();
+    } else {
+      // If aria-pressed is already false, no action is needed
+    }
+  })
+     cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
+     // The edit security group dialog is closed.
+     // 'Save successful' notification message is shown.
+cy.log('BUG, "An unhandled error has occurred. Reload" message is shown')
 
+     cy.log('12. Re-login and navigate to the Personnel statuses overview')
+     cy.get('.profile-picture').click()
+     cy.contains('Logout').click()
+     cy.get('#Username').type('Richard')
+     cy.get('#Password').type('Test123')
+     cy.get('#Login').click()
+     cy.get('#tree-item-12 > .k-link > .k-item-text').click()
+     cy.get(':nth-child(3) > .svx-settings-container-body > :nth-child(3) > a').contains('Personnel settings').click()
+     cy.get('.k-tabstrip-items').contains('Personnel statuses').click()
+     // 'ADD' button is not available. Bin icons are not available.
+cy.log('BUG, ADD and Bin icons are available ')
 
-
-
-
+     cy.log('13. Double-click on any record and change the name and click \'SAVE\'')
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').clear().type('TTC1284RNTESTchange')
+     cy.wait(2000)
+     cy.get('.k-master-row > [data-col-index="1"]').dblclick().wait(1000)
+     cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').clear().type('TC1284RNTESTchangestep13')
+     cy.wait(1000)
+     cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
+     //  The user is redirected to the 'Personnel statuses' overview screen
+     cy.get('#tree-item-12 > .k-link > .k-item-text').click()
+     cy.get(':nth-child(3) > .svx-settings-container-body > :nth-child(3) > a').contains('Personnel settings').click()
+     cy.get('.k-tabstrip-items').contains('Personnel statuses').click()
+     //  The grid list is updated with newly created item.
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper').type('TC1284RNTESTchangestep13')
+     cy.get('.k-grid-content').should('contain', 'TC1284RNTESTchangestep13')
 
 
 
