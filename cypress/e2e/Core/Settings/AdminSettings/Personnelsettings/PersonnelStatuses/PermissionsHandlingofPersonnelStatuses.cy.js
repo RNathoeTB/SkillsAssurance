@@ -185,7 +185,7 @@ cy.log('BUG, "An unhandled error has occurred. Reload" message is shown')
 cy.log('BUG, ADD and Bin icons are available ')
 
      cy.log('13. Double-click on any record and change the name and click \'SAVE\'')
-     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').clear().type('TTC1284RNTESTchange')
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').clear().type('TC1284RNTESTchange')
      cy.wait(2000)
      cy.get('.k-master-row > [data-col-index="1"]').dblclick().wait(1000)
      cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').clear().type('TC1284RNTESTchangestep13')
