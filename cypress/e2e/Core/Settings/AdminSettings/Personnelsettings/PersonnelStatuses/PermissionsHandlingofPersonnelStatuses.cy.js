@@ -7,15 +7,6 @@ describe('Settings > Personnel settings', () => {
      cy.get('#Password').type('Nathoe')
      cy.get('#Login').click()
      // Test data:'View'/'Create'/'Update'/'Delete' permissions to 'Personnel statuses' are applied.
-    //  cy.get('#tree-item-12 > .k-link > .k-item-text').click()
-    //  cy.get(':nth-child(3) > .svx-settings-container-body > :nth-child(3) > a').contains('Personnel settings').click()
-    //  cy.get('.k-tabstrip-items').contains('Personnel statuses').click()
-    //  cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').clear().type('TC1284Permissionschanged')
-    //  cy.wait(2000)
-    //  cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
-    //  cy.get('.k-button-solid-primary').click()
-    //  cy.get(' .k-link > .svx-font-2').eq(3).click()
-    //  cy.get(' .k-link > .svx-font-2').eq(4).click()
      });
 
     it('Permissions Handling of Personnel Statuses', () => {
@@ -93,17 +84,40 @@ cy.log('\'NO\'/\'YES\' buttons available. BUG >>>>>>>>>> CANCEL & OK is availabl
      cy.get('#tree-item-12 > .k-link').click()
      cy.get(':nth-child(1) > .svx-settings-container-body > :nth-child(2) > a > div').click()
      
-     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Admin settings')
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Admin settings').wait(2000)
      cy.get('[data-render-row-index="2"] > [data-col-index="1"]').contains('Admin settings').dblclick()
      cy.wait(2000)
      cy.get('.k-link > .svx-font-2').eq(1).click()
-     cy.get('.k-link > .svx-font-2').eq(1).click()
-     cy.get(':nth-child(3) > :nth-child(2) > :nth-child(4) > .svx-permission-block-header').within(() => {
+     cy.get('.k-link > .svx-font-2').eq(5).click()
+     cy.get(':nth-child(3) > :nth-child(2) > :nth-child(4)').contains('Personnel')
+     cy.get(':nth-child(4) > .svx-permission-block-body > :nth-child(7)').within(() => {
+        cy.contains('Personnel statuses').should('exist');
         cy.contains('View').should('exist');
         cy.contains('Update').should('exist');
         cy.contains('Create').should('exist');
         cy.contains('Delete').should('exist');
     })
+     cy.log('7. Unselect \'Delete\' and click \'SAVE\' button')
+     cy.get(':nth-child(4) > .svx-permission-block-body > :nth-child(7) > .right-column > .k-button-group > .k-group-end').click()
+     cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
+     // The edit security group dialog is closed.
+     // 'Save successful' notification message is shown.
+cy.log('BUG, "An unhandled error has occurred. Reload" message is shown')
+      
+     cy.log('8. Re-login and navigate to the Personnel statuses overview')
+     cy.get('.profile-picture').click()
+     cy.contains('logout').click()
+     //  User is not able to remove grid records.
+     //  Bin icons are not available. 'ADD' button is available.
+     cy.log('BUG, records can be deleted, Bin icons are available ')
+
+
+
+
+
+
+
+
 
     })   
 })
