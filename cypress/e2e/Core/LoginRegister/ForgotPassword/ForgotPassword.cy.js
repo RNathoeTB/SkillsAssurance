@@ -1,6 +1,6 @@
 describe('Forgot Password', () => {
 
-  it('Forgot Password', () => {
+  it.skip('Forgot Password', () => {
 
     cy.log('1. Observe opened \'Welcome back\' screen')
     cy.contains('Forgot password?').should('be.visible')

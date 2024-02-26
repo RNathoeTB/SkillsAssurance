@@ -4,7 +4,7 @@ describe('Roles', () => {
       cy.log('Login')
       // Bijvoorbeeld: inloggen voordat elke test wordt uitgevoerd
       cy.get('#Username').type('Richard')
-      cy.get('#Password').type('Nathoe')
+      cy.get('#Password').type('Test123')
       cy.get('#Login').click()  
 
       cy.log('Entry point: Manage Section -> Organization > Roles')
@@ -70,7 +70,7 @@ describe('Roles', () => {
     cy.contains('span.k-item-text', 'Personnel').click(); 
     cy.get('#tree-item-4_0 > .k-link > .k-item-text').click(); 
     cy.get('.k-filter-row > [data-col-index="1"]').type('Rich Nath')
-    cy.get('.k-grid-content').contains('Rich Nathoe ()').click()
+    cy.get('.k-grid-content').contains('Rich Test123 ()').click()
     cy.get('.k-tabstrip-items').contains('Organization').click()
     cy.contains('span.k-button-text', 'Edit').click();
     
@@ -170,7 +170,7 @@ while (scrolledAmount <= maxScroll) {
     cy.contains('span.k-item-text', 'Personnel').click(); 
     cy.get('#tree-item-4_0 > .k-link > .k-item-text').click(); 
     cy.get('.k-filter-row > [data-col-index="1"]').type('Rich Nath')
-    cy.get('.k-grid-content').contains('Rich Nathoe ()').click()
+    cy.get('.k-grid-content').contains('Rich Test123 ()').click()
     cy.wait(3000)
     cy.get('.k-tabstrip-items').contains('Organization').click()
     cy.contains('span.k-button-text', 'Edit').click();
@@ -210,7 +210,7 @@ while (scrolledAmount <= maxScroll) {
     cy.contains('span.k-item-text', 'Personnel').click(); 
     cy.get('#tree-item-4_0 > .k-link > .k-item-text').click(); 
     cy.get('.k-filter-row > [data-col-index="1"]').type('Rich Nath')
-    cy.get('.k-grid-content').contains('Rich Nathoe ()').click()
+    cy.get('.k-grid-content').contains('Rich Test123 ()').click()
     cy.wait(3000)
     cy.get('.k-tabstrip-items').contains('Organization').click()
     cy.contains('span.k-button-text', 'Edit').click();
@@ -254,7 +254,7 @@ while (scrolledAmount <= maxScroll) {
     cy.contains('span.k-item-text', 'Personnel').click(); 
     cy.get('#tree-item-4_0 > .k-link > .k-item-text').click(); 
     cy.get('.k-filter-row > [data-col-index="1"]').type('Rich Nath')
-    cy.get('.k-grid-content').contains('Rich Nathoe ()').click()
+    cy.get('.k-grid-content').contains('Rich Test123 ()').click()
     cy.wait(3000)
     cy.get('.k-tabstrip-items').contains('Organization').click()
     cy.contains('span.k-button-text', 'Edit').click();
@@ -450,7 +450,7 @@ it('Permissions Handling of Roles', () => {
     cy.contains('Welcome back').should('be.visible')
     cy.wait(3000)
     cy.get('#Username').type('Richard')
-    cy.get('#Password').type('Nathoe')
+    cy.get('#Password').type('Test123')
     cy.get('#Login').click()
     cy.contains('Dashboard').should('be.visible')
     cy.contains('span.k-item-text', 'Organization').click(); //organization
@@ -487,7 +487,7 @@ it('Permissions Handling of Roles', () => {
     cy.contains('Welcome back').should('be.visible')
     cy.wait(3000)
     cy.get('#Username').type('Richard')
-    cy.get('#Password').type('Nathoe')
+    cy.get('#Password').type('Test123')
     cy.get('#Login').click()
     cy.contains('Dashboard').should('be.visible')
     cy.contains('span.k-item-text', 'Organization').click(); //organization
@@ -523,7 +523,7 @@ it('Permissions Handling of Roles', () => {
     cy.contains('Welcome back').should('be.visible')
     cy.wait(3000)
     cy.get('#Username').type('Richard')
-    cy.get('#Password').type('Nathoe')
+    cy.get('#Password').type('Test123')
     cy.get('#Login').click()
     cy.contains('Dashboard').should('be.visible')
     cy.contains('span.k-item-text', 'Organization').click(); //organization
@@ -564,7 +564,7 @@ it('Permissions Handling of Roles', () => {
     cy.contains('Welcome back').should('be.visible')
     cy.wait(3000)
     cy.get('#Username').type('Richard')
-    cy.get('#Password').type('Nathoe')
+    cy.get('#Password').type('Test123')
     cy.get('#Login').click()
     cy.contains('Dashboard').should('be.visible')
     cy.contains('span.k-item-text', 'Organization').click(); //organization

@@ -4,7 +4,7 @@ describe('Settings > Personnel settings', () => {
    cy.log('Login')
     // Bijvoorbeeld: inloggen voordat elke test wordt uitgevoerd
    cy.get('#Username').type('Richard')
-   cy.get('#Password').type('Nathoe')
+   cy.get('#Password').type('Test123')
    cy.get('#Login').click()
    
    cy.log('Cleanup')
@@ -92,9 +92,9 @@ describe('Settings > Personnel settings', () => {
    cy.get('#tree-item-4 > .k-link > .telerik-blazor').click()
    cy.get('#tree-item-4_0 > .k-link > .k-item-text') .click()
   //  open an Employee profile (with already a status)
-   cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Rich Nathoe')
+   cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Rich Test123')
    cy.wait(1000)
-   cy.get('.k-grid-content').should('contain', 'Rich Nathoe').contains('Rich Nathoe ()').click()
+   cy.get('.k-grid-content').should('contain', 'Rich Test123').contains('Rich Test123 ()').click()
   //  within the Organization tab, click \'EDIT\' and open the Personnel status drop down
    cy.wait(3000)
    cy.get('.k-tabstrip-item:contains("Organization")').click()
@@ -112,7 +112,7 @@ describe('Settings > Personnel settings', () => {
    cy.get('.modal-buttons > :nth-child(1) > .telerik-blazor').click()
   //  The user is redirected to the Employees overview grid.
   // The status is correctly shown in the Personnel status column, including color indication. 
-   cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Rich Nathoe')
+   cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Rich Test123')
    cy.wait(1000) 
    cy.get('.k-master-row > [data-col-index="5"]').should('contain', 'TestBoticsRN')
 

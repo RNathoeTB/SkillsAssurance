@@ -4,7 +4,7 @@ describe('Settings', () => {
     cy.log('Login')
     // Bijvoorbeeld: inloggen voordat elke test wordt uitgevoerd
     cy.get('#Username').type('Richard')
-    cy.get('#Password').type('Nathoe')
+    cy.get('#Password').type('Test123')
     cy.get('#Login').click()  
 
   cy.log('Cleanup')
@@ -88,8 +88,8 @@ it('Add Email Category', () => {
 
     // Employee profile is opened in Details tab 
     // cy.get('.k-grid-content').contains('Frederike Lindeyer ()').click()
-    cy.get('.k-filter-row > [data-col-index="1"]').type('Rich Nathoe ()')
-    cy.get('.k-grid-content').contains('Rich Nathoe ()').click()
+    cy.get('.k-filter-row > [data-col-index="1"]').type('Rich Test123 ()')
+    cy.get('.k-grid-content').contains('Rich Test123 ()').click()
     cy.get('.k-tabstrip-items').contains('Details').click()
 
     cy.log('9. Click \'EDIT\' button and on \'Contact info\' section expand \'Email\(s)\'. Click on the \'Add email\' link and open the \'Category\' drop down.')

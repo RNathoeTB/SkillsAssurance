@@ -4,7 +4,7 @@ beforeEach(() => {
   cy.log('Login')
 //Bijvoorbeeld: inloggen voordat elke test wordt uitgevoerd
   cy.get('#Username').type('Richard')
-  cy.get('#Password').type('Nathoe')
+  cy.get('#Password').type('Test123')
   cy.get('#Login').click()
 
   cy.log('Cleanup \'Testcase2385ART\'')
