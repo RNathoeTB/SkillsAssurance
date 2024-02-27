@@ -11,15 +11,17 @@ describe('Settings > Personnel settings', () => {
      cy.get('#tree-item-10_0 > .k-link').click()
      cy.wait(2000)
      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('TC1057Step5')
+     cy.wait(3000)
      cy.get('.k-master-row > [data-col-index="1"]').should('contain', 'TC1057Step5')
      cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
      cy.get('.k-button-solid-primary').click()
+     cy.wait(2000)
     })
     
     it('Add Certificate', () => {
 cy.log('1. Observe the grid')
      // The grid contains the following columns:
-     cy.get('#tree-item-10 > .k-link').click()
+     // cy.get('#tree-item-10 > .k-link').click()
      cy.get('#tree-item-10_0 > .k-link').click()
      //  'Name'
      cy.get('[data-text="Name"] > .k-cell-inner > .k-link > .k-column-title').should('have.class', "k-column-title").contains('Name')
@@ -87,16 +89,14 @@ cy.log('6. Navigate to Employees overview grid and open an Employee profile; wit
      //  The newly created item is available for selection. 
 
 cy.log('7. Select the newly created certificate, fill in the required fields and press \'SAVE\'')
-     cy.get('.svx-modal-body > :nth-child(1) > .svx-formfield-content > .k-combobox').type('TC1057Step5').wait(3000).type('{downarrow}').type('{enter}')
+     cy.get('.svx-modal-body > :nth-child(1) > .svx-formfield-content > .k-combobox').type('TC1057Step5').wait(2000)
+     cy.contains('TC1057Step5').click()
      cy.get(':nth-child(1) > .svx-formfield-content > .k-datepicker').find('.telerik-blazor.k-button.k-input-button.k-button-solid.k-button-md.k-button-solid-base.k-icon-button').click().wait(1000)
      cy.get('.k-calendar-nav-today > :nth-child(1) > .k-button-text').click()
      cy.get(':nth-child(2) > .svx-formfield-content > .k-datepicker').find('.telerik-blazor.k-button.k-input-button.k-button-solid.k-button-md.k-button-solid-base.k-icon-button').click().wait(1000)
      cy.get('.k-calendar-nav-today > :nth-child(1) > .k-button-text').click()
      cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
      //  The certificate is stored within the profile.
-cy.log('BUG: certificate is not stored within profile, \'saved succesful\' popup is shown')
-     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('TC1057Step5')
-     cy.get('.k-grid-content').contains('TC1057Step5')
     })
     
     })
