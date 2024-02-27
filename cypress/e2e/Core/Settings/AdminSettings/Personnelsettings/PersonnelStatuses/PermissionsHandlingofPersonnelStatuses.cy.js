@@ -191,7 +191,7 @@ cy.log('BUG, "An unhandled error has occurred. Reload" message is shown')
 
      cy.log('12. Re-login and navigate to the Personnel statuses overview')
      cy.get('.profile-picture').click()
-     cy.contains('Logout').click()
+     cy.contains('Logout').click() 
      cy.get('#Username').type('Richard')
      cy.get('#Password').type('Test123')
      cy.get('#Login').click()
