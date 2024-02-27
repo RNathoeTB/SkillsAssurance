@@ -5,6 +5,15 @@ describe('Settings > Personnel settings', () => {
      cy.get('#Username').type('Richard')
      cy.get('#Password').type('Test123')
      cy.get('#Login').click()
+
+     cy.log('cleanup added certificate TC1057Step5')
+     cy.get('#tree-item-10 > .k-link').click()
+     cy.get('#tree-item-10_0 > .k-link').click()
+     cy.wait(2000)
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('TC1057Step5')
+     cy.get('.k-master-row > [data-col-index="1"]').should('contain', 'TC1057Step5')
+     cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
+     cy.get('.k-button-solid-primary').click()
     })
     
     it('Add Certificate', () => {
@@ -44,8 +53,50 @@ cy.log('3. Observe \'General Info\' section')
       })
 
 cy.log('4. Enter a Name and Code and click \'CANCEL\'')
-      
+     cy.get(':nth-child(2) > .svx-formfield-content > .input-group > .k-textbox').type('TC1057Step4')
+     cy.get(':nth-child(3) > .svx-formfield-content > .input-group > .k-textbox').type('TC1057')
+     cy.get('.modal-buttons > :nth-child(1) > .telerik-blazor').click()
+     cy.wait(3000)
+     // The user is redirected to the Certificates overview screen.
+     // The new certificate is not added.
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('TC1057Step4')
+     cy.get('[data-col-index="2"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('TC1057')
+     cy.wait(3000)
+     cy.get('.k-grid-content').should('not.contain', 'TC1057Step4')
 
+cy.log('5. Enter a Name and Code and click \'SAVE\'')
+     cy.get('.svx-grid-footer-buttons > .svx-button > .telerik-blazor').click()
+     cy.get(':nth-child(2) > .svx-formfield-content > .input-group > .k-textbox').type('TC1057Step5')
+     cy.get(':nth-child(3) > .svx-formfield-content > .input-group > .k-textbox').type('TC1057')
+     cy.get(':nth-child(2) > .telerik-blazor > .k-button-text').click()
+     cy.wait(3000)
+     // The user is redirected to the Certificates overview screen.
+     // The grid list is updated with newly created item.
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('TC1057Step5')
+    //  cy.get('[data-col-index="2"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('TC1057')
+     cy.wait(3000)
+     cy.get('.k-grid-content').should('contain', 'TC1057Step5')
+    
+cy.log('6. Navigate to Employees overview grid and open an Employee profile; within the Evidences > Certificates tab, click \'ADD\' and open the Certificate drop down')
+     cy.get('#tree-item-4 > .k-link').click()
+     cy.get('#tree-item-4_0 > .k-link').click()
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Ritchie Nathoe')
+     cy.get('.k-master-row > [data-col-index="1"]').should('contain', 'Ritchie Nathoe').dblclick()
+     cy.get(' .k-link > .svx-font-2').eq(3).click()
+     cy.get('.svx-grid-footer-buttons > .svx-button > .telerik-blazor').click()
+     //  The newly created item is available for selection. 
+
+cy.log('7. Select the newly created certificate, fill in the required fields and press \'SAVE\'')
+     cy.get('.svx-modal-body > :nth-child(1) > .svx-formfield-content > .k-combobox').type('TC1057Step5').wait(3000).type('{downarrow}').type('{enter}')
+     cy.get(':nth-child(1) > .svx-formfield-content > .k-datepicker').find('.telerik-blazor.k-button.k-input-button.k-button-solid.k-button-md.k-button-solid-base.k-icon-button').click().wait(1000)
+     cy.get('.k-calendar-nav-today > :nth-child(1) > .k-button-text').click()
+     cy.get(':nth-child(2) > .svx-formfield-content > .k-datepicker').find('.telerik-blazor.k-button.k-input-button.k-button-solid.k-button-md.k-button-solid-base.k-icon-button').click().wait(1000)
+     cy.get('.k-calendar-nav-today > :nth-child(1) > .k-button-text').click()
+     cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
+     //  The certificate is stored within the profile.
+cy.log('BUG: certificate is not stored within profile, \'saved succesful\' popup is shown')
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('TC1057Step5')
+     cy.get('.k-grid-content').contains('TC1057Step5')
     })
     
     })
