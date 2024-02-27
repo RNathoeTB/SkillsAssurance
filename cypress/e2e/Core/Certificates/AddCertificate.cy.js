@@ -5,23 +5,12 @@ describe('Settings > Personnel settings', () => {
      cy.get('#Username').type('Richard')
      cy.get('#Password').type('Test123')
      cy.get('#Login').click()
-
-     cy.log('cleanup added certificate TC1057Step5')
-     cy.get('#tree-item-10 > .k-link').click()
-     cy.get('#tree-item-10_0 > .k-link').click()
-     cy.wait(2000)
-     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('TC1057Step5')
-     cy.wait(3000)
-     cy.get('.k-master-row > [data-col-index="1"]').should('contain', 'TC1057Step5')
-     cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
-     cy.get('.k-button-solid-primary').click()
-     cy.wait(2000)
     })
     
     it('Add Certificate', () => {
 cy.log('1. Observe the grid')
      // The grid contains the following columns:
-     // cy.get('#tree-item-10 > .k-link').click()
+     cy.get('#tree-item-10 > .k-link').click()
      cy.get('#tree-item-10_0 > .k-link').click()
      //  'Name'
      cy.get('[data-text="Name"] > .k-cell-inner > .k-link > .k-column-title').should('have.class', "k-column-title").contains('Name')
@@ -97,6 +86,17 @@ cy.log('7. Select the newly created certificate, fill in the required fields and
      cy.get('.k-calendar-nav-today > :nth-child(1) > .k-button-text').click()
      cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
      //  The certificate is stored within the profile.
+
+cy.log('cleanup added certificate TC1057Step5')
+     cy.get('#tree-item-10 > .k-link').click()
+     cy.get('#tree-item-10_0 > .k-link').click()
+     cy.wait(2000)
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('TC1057Step5')
+     cy.wait(3000)
+     cy.get('.k-master-row > [data-col-index="1"]').should('contain', 'TC1057Step5')
+     cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
+     cy.get('.k-button-solid-primary').click()
+
     })
     
     })
