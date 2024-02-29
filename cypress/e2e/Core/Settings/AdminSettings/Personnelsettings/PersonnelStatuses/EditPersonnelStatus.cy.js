@@ -1,8 +1,8 @@
 describe('Settings > Personnel settings', () => {
 beforeEach(() => {
-//Voeg hier de stappen toe die je voor elke test wilt uitvoeren
+ //Voeg hier de stappen toe die je voor elke test wilt uitvoeren
   cy.log('Login')
-//Bijvoorbeeld: inloggen voordat elke test wordt uitgevoerd
+ //Bijvoorbeeld: inloggen voordat elke test wordt uitgevoerd
   cy.get('#Username').type('Richard')
   cy.get('#Password').type('Test123')
   cy.get('#Login').click()
@@ -15,8 +15,8 @@ beforeEach(() => {
   cy.wait(3000)
   cy.get('.k-grid-content').should('contain', 'Testcase2385ART')
   cy.contains('Testcase2385ART').dblclick()
-// Clear the existing text
-// Type another text than 'Testcase2385ART' and unclick 'Active'status
+ // Clear the existing text
+ // Type another text than 'Testcase2385ART' and unclick 'Active'status
   cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').clear().type('Testcase2385')
   cy.get('.k-checkbox-wrap').click()
   cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
@@ -31,7 +31,7 @@ it.only('Edit Personnel Status', () => {
   cy.wait(3000)
   cy.get('.k-grid-content').should('contain', 'Testcase2385')
   cy.contains('Testcase2385').dblclick()
-//'Personnel status' pop-up appears. It contains all of the prefilled data.
+ //'Personnel status' pop-up appears. It contains all of the prefilled data.
   cy.get('.svx-modal-header').contains('Personnel status')
   cy.get('.required-field').contains('Name')
   cy.get(':nth-child(2) > .svx-formfield-label > label').contains('Description')
@@ -44,9 +44,9 @@ it.only('Edit Personnel Status', () => {
   cy.wait(3000)
   cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
   cy.wait(3000)
-// Pop-up closes.
+ // Pop-up closes.
   cy.get('.svx-modal-header > div').should('not.exist')
-// The new Name is visible in the grid in place of the old Name.
+ // The new Name is visible in the grid in place of the old Name.
   cy.get('#tree-item-12 > .k-link > .k-item-text').click()
   cy.get(':nth-child(3) > .svx-settings-container-body > :nth-child(3) > a').contains('Personnel settings').click()
   cy.get(' .k-link > .svx-font-2').eq(4).click()
@@ -86,9 +86,7 @@ it.only('Edit Personnel Status', () => {
   cy.get('.svx-modal-header > div').should('not.exist') 
 
 
-
-  // The new color is visible in the grid.
-
+  cy.log('BUG: The new color is not visible in the grid.')
 
 
   cy.log('5. Look at \'Personnel status\' column of that record.')
@@ -119,23 +117,16 @@ it.only('Edit Personnel Status', () => {
   cy.get('.k-master-row > [data-col-index="2"]').should('contain', 'No')
 
   // //  check 'Activate' status
-  // cy.log('Cleanup \'Testcase2385ART\'')
-  // cy.get('#tree-item-12 > .k-link > .k-item-text').click()
-  // cy.get(':nth-child(3) > .svx-settings-container-body > :nth-child(3) > a').contains('Personnel settings').click()
-  // cy.get(' .k-link > .svx-font-2').eq(4).click()
-  // cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Testcase2385ART')
-  // cy.wait(3000)
-  // cy.get('.k-grid-content').should('contain', 'Testcase2385ART')
-  // cy.contains('Testcase2385ART').dblclick()
-  // cy.get('.k-checkbox-wrap').click()
-  // cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
-
-  cy.log('7. Navigate to Settings > Personnel settings > Personnel statuses. Open the same record again.')
-  
-
-
-
-
+  cy.log('Cleanup \'Testcase2385ART\'')
+  cy.get('#tree-item-12 > .k-link > .k-item-text').click()
+  cy.get(':nth-child(3) > .svx-settings-container-body > :nth-child(3) > a').contains('Personnel settings').click()
+  cy.get(' .k-link > .svx-font-2').eq(4).click()
+  cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Testcase2385ART')
+  cy.wait(3000)
+  cy.get('.k-grid-content').should('contain', 'Testcase2385ART')
+  cy.contains('Testcase2385ART').dblclick()
+  cy.get('.k-checkbox-wrap').click()
+  cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
 
 })
 
