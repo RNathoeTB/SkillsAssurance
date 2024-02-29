@@ -1,4 +1,4 @@
-describe('Settings > Personnel settings', () => {
+describe('Evidences > Certificates', () => {
     beforeEach(() => {
      cy.log('Login')
       // Bijvoorbeeld: inloggen voordat elke test wordt uitgevoerd
@@ -96,7 +96,5 @@ cy.log('cleanup added certificate TC1057Step5')
      cy.get('.k-master-row > [data-col-index="1"]').should('contain', 'TC1057Step5')
      cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
      cy.get('.k-button-solid-primary').click()
-
     })
-    
     })

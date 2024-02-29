@@ -1,11 +1,10 @@
-describe('Settings > Personnel settings', () => {
+describe('Evidences > Certificates', () => {
     beforeEach(() => {
       cy.log('Login')
       // Bijvoorbeeld: inloggen voordat elke test wordt uitgevoerd
       cy.get('#Username').type('Richard')
       cy.get('#Password').type('Test123')
       cy.get('#Login').click()
-
       // 'Certificate 1' is created and set-up as requirement in the application.
       // At least one Employee has the requirement assigned.
       // 'Certificate 2' is created and is not set-up as requirement.
@@ -50,7 +49,6 @@ describe('Settings > Personnel settings', () => {
       cy.get('.k-calendar-nav-today > :nth-child(1) > .k-button-text').click()
       cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
       cy.wait(2000)
-
     })
     
     it('Edit Certificate', () => {
@@ -111,7 +109,5 @@ cy.log('8. Navigate to Personnel > Employees and open any profile. Open the Cert
       cy.get(' .k-link > .svx-font-2').eq(3).click()
       cy.get('.svx-grid-footer-buttons > .svx-button > .telerik-blazor').click()
        //  The certificate inactivated in step 7 is not visible in the list of options.
-
     })
-    
     })

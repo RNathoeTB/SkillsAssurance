@@ -1,4 +1,4 @@
-describe('Settings > Personnel settings', () => {
+describe('Evidences > Certificates', () => {
     beforeEach(() => {
     cy.log('Login')
       // Bijvoorbeeld: inloggen voordat elke test wordt uitgevoerd
@@ -51,7 +51,7 @@ describe('Settings > Personnel settings', () => {
       cy.wait(2000)
     })
     
-    it('Edit Certificate', () => {
+    it('Delete Certificate', () => {
 cy.log('1. Click on bin icon of \'Certificate 1\' item ')
      cy.get('#tree-item-10 > .k-link').click()
      cy.get('#tree-item-10_0 > .k-link').click()
