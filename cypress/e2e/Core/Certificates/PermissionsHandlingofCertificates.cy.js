@@ -23,7 +23,6 @@ describe('Evidences > Certificates', () => {
     } 
     })  
      cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
-
     })
      //  Evidences -> Certificates
 it('Permissions Handling of Certificates', () => {
