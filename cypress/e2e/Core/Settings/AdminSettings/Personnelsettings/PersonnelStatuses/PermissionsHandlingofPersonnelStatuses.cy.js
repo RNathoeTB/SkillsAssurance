@@ -52,6 +52,7 @@ describe('Settings > Personnel settings', () => {
 });
      // 'ADD' button is present.
      cy.get('.svx-button > .telerik-blazor').should('exist')
+     
      cy.log('2. Click \'ADD\', fill all required fields and click \'SAVE\'')
      cy.get('.svx-button > .telerik-blazor').click()
      cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').clear().type('TC1284Permissions')
@@ -60,9 +61,9 @@ describe('Settings > Personnel settings', () => {
      //  The user is redirected to the 'Personnel statuses' overview screen.
      cy.get('.k-tabstrip-items').contains('Personnel statuses').click()
      //  The grid list is updated with newly created item.
-     //  cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').clear().type('TC1284Permissions')
-     //  cy.wait(2000)
-     //  cy.get('.k-grid-content').contains('TC1284Permissions')
+      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').clear().type('TC1284Permissions')
+      cy.wait(2000)
+      cy.get('.k-grid-content').contains('TC1284Permissions')
 cy.log('BUG: The grid list is updated with newly created item. >>Not updating. ')
      cy.get(' .k-link > .svx-font-2').eq(3).click()
      cy.get(' .k-link > .svx-font-2').eq(4).click() 
