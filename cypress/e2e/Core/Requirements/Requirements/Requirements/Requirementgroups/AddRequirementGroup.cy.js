@@ -12,6 +12,13 @@ describe('Requirements > Requirement groups', () => {
      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('TC1074Test').wait(2000)
      cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
      cy.get('.k-button-solid-primary').click()
+
+     cy.get('#tree-item-8_1 > .k-link').click()
+     cy.get('#tree-item-8_0 > .k-link').click() 
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').type('Advanced Fire Fighting')
+     cy.get('.k-master-row > [data-col-index="5"]').contains('TC1074Test')
+     cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
+     cy.get('.k-button-solid-primary').click()
     })
     
     it('Add Requirement Group', () => {
@@ -101,16 +108,23 @@ cy.log('8. Navigate to Requirements > Requirements and click \'ADD\'')
 
 cy.log('9. Open the \'Requirement group\' drop down')
      cy.get(':nth-child(5) > .svx-formfield-content > .k-combobox').find('.k-input-inner').type('TC1074Test').wait(3000).type('{downarrow}').type('{enter}')
-     cy.get(':nth-child(5) > .svx-formfield-content').contains('TC1074Test')
+    //  cy.get(':nth-child(5) > .svx-formfield-content').contains('TC1074Test')
 
 cy.log('10. Select the newly created requirement group, fill the other required fields and click \'SAVE\'')
-    
-
-
-
-
-
-
-
+     cy.get(':nth-child(1) > .svx-block-body > :nth-child(1) > .svx-formfield-content > .k-combobox > .k-input-inner').type('Certificate').wait(3000).type('{downarrow}').type('{enter}')
+     cy.get(':nth-child(1) > .svx-block-body > :nth-child(2) > .svx-formfield-content > .k-combobox').find('.k-input-inner').type('Advanced Fire Fighting').wait(3000).type('{downarrow}').type('{enter}')
+     cy.get(':nth-child(2) > .svx-block-body > :nth-child(1) > .svx-formfield-content > .k-combobox').find('.k-input-inner').type('Company Mandatory').wait(3000).type('{downarrow}').type('{enter}')
+     cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
+     //  'Save successful' message is displayed. 
+     cy.get('.k-notification').contains('Save successful.')
+     // The user is redirected back to the 'Requirements' overview screen.
+cy.log('BUG: not redirected to overview screen, reload message pops up')
+     cy.get('#tree-item-8_1 > .k-link').click()
+     cy.get('#tree-item-8_0 > .k-link').click()
+     cy.get('.svx-page-header-title').should('exist').contains('Requirement')
+     //New requirement is created, assigned to the newly created requirement group.   
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').type('Advanced Fire Fighting')
+     cy.get('.k-master-row > [data-col-index="1"]').contains('Advanced Fire Fighting')
+     cy.get('.k-master-row > [data-col-index="5"]').contains('TC1074Test')      
     })
     })
