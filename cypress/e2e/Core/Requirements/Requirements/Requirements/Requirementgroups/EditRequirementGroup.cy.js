@@ -120,34 +120,20 @@ cy.log('9. Navigate to MANAGE -> Requirements -> Requirement groups; open \'Requ
      cy.get('#tree-item-8_1 > .k-link').click()
      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Requirement group 1 changed').wait(3000)
      cy.get('.k-master-row > [data-col-index="1"]').contains('Requirement group 1').dblclick().wait(3000)
-     cy.get('.k-multiselect').find('.k-input-inner').type('{backspace}')
+     cy.get('.k-multiselect').find('.k-input-inner').type('{backspace}').click()
      cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
      //  The user is redirected to the Requirement groups overview screen.
      cy.get('.svx-page-header').contains('Requirement groups')
      //  The change has been successfully saved and shows updated in the grid.
      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Requirement group 1 changed').wait(3000)
-     cy.get('.k-alt > [data-col-index="4"]').should('not.contain', 'Americas')   
-
-
-
-
-
-
-
-
+     cy.get('.k-grid-content').should('not.contain', 'Americas')
      
-    //  cy.log('cleanup')
+     cy.log('cleanup')
     //  cy.get('#tree-item-8_0 > .k-link').click()
     //  cy.get('#tree-item-8_1 > .k-link').click().wait(3000)
     //  cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Requirement group 1 changed').wait(3000)
-    //  cy.get('.k-master-row > [data-col-index="1"]').contains('Requirement group 1 changed')
-    //  cy.get('[data-render-row-index="2"] > [data-col-index="0"]').click()
-    //  cy.get('.k-button-solid-primary').click()
-
-
-
-
-
-
+     cy.get('.k-master-row > [data-col-index="1"]').contains('Requirement group 1 changed')
+     cy.get('[data-render-row-index="2"] > [data-col-index="0"]').click()
+     cy.get('.k-button-solid-primary').click()
     })
     })
