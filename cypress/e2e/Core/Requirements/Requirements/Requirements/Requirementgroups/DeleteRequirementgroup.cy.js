@@ -5,7 +5,6 @@ describe('Requirements > Requirement groups', () => {
      cy.get('#Username').type('Richard')
      cy.get('#Password').type('Test123')
      cy.get('#Login').click()
-
      // 'Requirement group 1' is used in at least 1 Requirement. 
      cy.get('#tree-item-8 > .k-link > .telerik-blazor').click()
      cy.get('#tree-item-8_1 > .k-link').click()
