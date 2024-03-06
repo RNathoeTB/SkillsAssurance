@@ -135,5 +135,12 @@ cy.log('9. Navigate to MANAGE -> Requirements -> Requirement groups; open \'Requ
      cy.get('.k-master-row > [data-col-index="1"]').contains('Requirement group 1 changed')
      cy.get('[data-render-row-index="2"] > [data-col-index="0"]').click()
      cy.get('.k-button-solid-primary').click()
+
+     cy.get('#tree-item-8_0 > .k-link').click().wait(3000)
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Cert req group 1-3').wait(3000)
+     cy.get('[data-render-row-index="2"] > [data-col-index="1"]').contains('Cert req group 1-3')
+     cy.get('[data-render-row-index="2"] > [data-col-index="0"]').click()
+     cy.get('.k-button-solid-primary').click()
+
     })
     })
