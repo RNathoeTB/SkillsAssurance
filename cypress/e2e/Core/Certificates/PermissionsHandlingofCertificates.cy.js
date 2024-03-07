@@ -103,7 +103,7 @@ cy.log('5. Click \'Yes\'')
      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').clear().type('TC2575Certificateschanged')
      cy.get('.k-grid-norecords > .k-table-td').should('exist').contains('No items to display')
  
-cy.log('4. Go to Settings -> Security groups -> Admin security group-> Permissions tab -> Core subtab')
+cy.log('6. Go to Settings -> Security groups -> Admin security group-> Permissions tab -> Core subtab')
      cy.get('#tree-item-12 > .k-link').click()
      cy.get(':nth-child(1) > .svx-settings-container-body > :nth-child(2) > a > div').click()
      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Admin settings').wait(3000)
@@ -151,7 +151,7 @@ cy.log('BUG: ADD and Bin icons are available ')
      //  'ADD' button is available.
      cy.get('.svx-grid-footer-buttons > .svx-button > .telerik-blazor').should('exist')
 
-     cy.log('9. Click \'ADD\', fill all required fields and click \'SAVE\'')
+cy.log('9. Click \'ADD\', fill all required fields and click \'SAVE\'')
      cy.get('.svx-grid-footer-buttons > .svx-button > .telerik-blazor').click().wait(3000)
      cy.get(':nth-child(2) > .svx-formfield-content > .input-group > .k-textbox').type('TC2575Certificatesstep9')
      cy.wait(2000)
@@ -165,7 +165,7 @@ cy.log('BUG: ADD and Bin icons are available ')
      cy.wait(3000)
      cy.get('.k-master-row > [data-col-index="1"]').contains('TC2575Certificatesstep9')
 
-     cy.log('10. Double-click on the just added record and change the name and click \'SAVE\'')
+cy.log('10. Double-click on the just added record and change the name and click \'SAVE\'')
      cy.get('.k-master-row > [data-col-index="1"]').contains('TC2575Certificatesstep9').dblclick()
      //  The user is redirected to the 'Personnel statuses' overview screen.
      cy.get('.svx-page-header').contains('TC2575Certificatesstep9')
@@ -182,7 +182,7 @@ cy.log('BUG: ADD and Bin icons are available ')
      cy.wait(3000)
      cy.get('.k-master-row > [data-col-index="1"]').contains('TC2575Certificateschanged')
 
-     cy.log('11. Go to Settings -> Security groups -> Admin security group-> Permissions tab -> Core subtab and for Certificates unselect \'Create\' and click \'SAVE\'')
+cy.log('11. Go to Settings -> Security groups -> Admin security group-> Permissions tab -> Core subtab and for Certificates unselect \'Create\' and click \'SAVE\'')
      cy.get('#tree-item-12 > .k-link').click()
      cy.get(':nth-child(1) > .svx-settings-container-body > :nth-child(2) > a > div').click()
      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Admin settings').wait(3000)
@@ -193,7 +193,7 @@ cy.log('BUG: ADD and Bin icons are available ')
      cy.get(':nth-child(2) > :nth-child(2) > :nth-child(2) > .svx-permission-block > .svx-permission-block-body > :nth-child(2) > .right-column').contains('.telerik-blazor', 'Create')
      .invoke('attr', 'aria-pressed').then(ariaPressed => {
      if (ariaPressed === 'true') {
-      cy.get(':nth-child(4) > .svx-permission-block-body > :nth-child(7) > .right-column > .k-button-group > .k-group-end').click();
+          cy.get(':nth-child(2) > :nth-child(2) > :nth-child(2) > .svx-permission-block > .svx-permission-block-body > :nth-child(2) > .right-column').contains('.telerik-blazor', 'Create').click();
     } else {
       // If aria-pressed is already false, no action is needed
     }
@@ -232,7 +232,7 @@ cy.log('13. Double-click on any record and change the name and click \'SAVE\'')
      cy.wait(3000)
      cy.get('.k-master-row > [data-col-index="1"]').contains('TC2575Certificateschangedstep13')   
 
-     cy.log('14. Go to Settings -> Security groups -> Admin security group-> Permissions tab -> Core subtab and for Personnel statuses unselect \'Update\' and click \'SAVE\'')
+cy.log('14. Go to Settings -> Security groups -> Admin security group-> Permissions tab -> Core subtab and for Certificates unselect \'Update\' and click \'SAVE\'')
      cy.get('#tree-item-12 > .k-link').click()
      cy.get(':nth-child(1) > .svx-settings-container-body > :nth-child(2) > a > div').click()
      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Admin settings').wait(3000)
