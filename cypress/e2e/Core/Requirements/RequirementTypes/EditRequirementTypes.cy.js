@@ -19,19 +19,19 @@ describe('Requirements > Requirement Types', () => {
      cy.get(':nth-child(2) > .svx-formfield-content > .input-group > .k-textbox').type('Requirement having type 1')
      cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
      //  Specific employee has this requirement assigned.
-     cy.get('#tree-item-4 > .k-link').click()
-     cy.get('#tree-item-4_0 > .k-link').click()
-     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Ritchie Nathoe').wait(5000)
-     cy.get('.k-master-row > [data-col-index="1"]').should('contain', 'Ritchie Nathoe').dblclick()
-     cy.get(' .k-link > .svx-font-2').eq(3).click()
-     cy.get('.svx-grid-footer-buttons > .svx-button > .telerik-blazor').click()
-     cy.get('.svx-modal-body > :nth-child(1) > .svx-formfield-content > .k-combobox').find('.k-input-inner').type('Requirement having type 1').wait(3000).type('{enter}')
-     cy.get(':nth-child(1) > .svx-formfield-content > .k-datepicker').find('.telerik-blazor.k-button.k-input-button.k-button-solid.k-button-md.k-button-solid-base.k-icon-button').click().wait(1000)
-     cy.get('.k-calendar-nav-today > :nth-child(1) > .k-button-text').click()
-     cy.get(':nth-child(2) > .svx-formfield-content > .k-datepicker').find('.telerik-blazor.k-button.k-input-button.k-button-solid.k-button-md.k-button-solid-base.k-icon-button').click().wait(1000)
-     cy.get('.k-calendar-nav-today > :nth-child(1) > .k-button-text').click()
-     cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
-     
+     cy.get('#tree-item-8 > .k-link').click()
+     cy.get('#tree-item-8_0 > .k-link').click()
+     cy.get('.svx-button > .telerik-blazor').click()
+     cy.get(':nth-child(1) > .svx-block-body > :nth-child(1) > .svx-formfield-content > .k-combobox > .k-input-inner').type('Certificate')
+     cy.get(':nth-child(1) > .svx-block-body > :nth-child(1) > .svx-formfield-content > .k-combobox > .k-input-inner').wait(3000).type('{downarrow}').type('{enter}')
+     cy.get('input.k-input-inner').eq(1).type('Requirement having type 1')
+     cy.get('input.k-input-inner').eq(1).wait(3000).type('{downarrow}').type('{enter}')
+     cy.get('input.k-input-inner').eq(1).type('{enter}')
+     cy.get('input.k-input-inner').eq(2).type('Requirement type 1')
+     cy.wait(4000)
+     cy.get('input.k-input-inner').eq(2).type('{enter}') 
+     cy.get('input.k-input-inner').eq(6).type('Europe').wait(3000).type('{enter}')
+     cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click().wait(4000)
 
     })
     
@@ -43,8 +43,7 @@ cy.get('#tree-item-8 > .k-link').click()
      cy.get('.k-master-row > [data-col-index="1"]').contains('Requirement type 1').dblclick()
      //  The edit screen is opened showing the filled-in data. All fields are editable.
      cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').find('.k-input-inner').clear().type('Requirement type 1')
-     cy.get(':nth-child(2) > .svx-formfield-content > .input-group > .k-textbox').find('.k-input-inner').clear().type('Test')
-     
+     cy.get(':nth-child(2) > .svx-formfield-content > .input-group > .k-textbox').find('.k-input-inner').clear().type('Test')   
 
 cy.log('2. Change the \'Name\' and click \'SAVE\' button')
      cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').find('.k-input-inner').clear().type('Requirement type 1 changed').wait(3000)
@@ -55,33 +54,52 @@ cy.log('2. Change the \'Name\' and click \'SAVE\' button')
      cy.get('.k-master-row > [data-col-index="1"]').contains('Requirement type 1 changed')
 
 cy.log('3. Navigate to Requirements > Requirements and open any requirement. Open the \'Requirement type\' dropdown.')
+     cy.get('#tree-item-8 > .k-link').click()
      cy.get('#tree-item-8_0 > .k-link').click()
      cy.get('[data-render-row-index="2"] > [data-col-index="1"]').dblclick()
      cy.get(':nth-child(2) > .svx-block-body > :nth-child(1) > .svx-formfield-content').find('.k-input-inner').wait(2000).clear().type('Requirement type 1 changed').wait(3000)
+     //  The new name is shown, having replaced the old name.
      cy.get('.k-list-content').contains('Requirement type 1 changed')
-     cy.get('.modal-buttons > :nth-child(1) > .telerik-blazor').click()
+    //  cy.get('.modal-buttons > :nth-child(1) > .telerik-blazor').click()
 
-
-   
-    cy.log('cleanup')
+cy.log('4. Navigate to Requirements > Requirement types. Re-open the record of step 2 and change the name back to \'Requirement type 1\'. Change the \'Code\' and click \'SAVE\'.')
      cy.get('#tree-item-8_3 > .k-link').click()
-     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').clear().type('Requirement type 1 changed').wait(3000)
-     cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
-     cy.get('.k-button-solid-primary').click()
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Requirement type 1 changed').wait(3000)
+     cy.get('.k-master-row > [data-col-index="1"]').contains('Requirement type 1 changed').dblclick()
+     cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').find('.k-input-inner').clear().type('Requirement type 1').wait(3000)
+     cy.get(':nth-child(2) > .svx-formfield-content > .input-group > .k-textbox').find('.k-input-inner').clear().type('step4').wait(3000)
+     cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click().wait(5000)
+     // Changes are saved successfully.
+     // The corresponding grid record is updated with new values.
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').clear().type('Requirement type 1').wait(3000)
+     cy.get('.k-master-row > [data-col-index="1"]').contains('Requirement type 1')
+     cy.get('.k-master-row > [data-col-index="2"]').contains('step4')
 
-     cy.get('#tree-item-10 > .k-link').click()
-     cy.get('#tree-item-10_0 > .k-link').click()
-     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Requirement having type 1')
-     cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
-     cy.get('.k-button-solid-primary').click()
+cy.log('4. Navigate to Personnel > Employees and open Employee having \'Requirement having type 1\' as requirement. Observe the \'Certificates\' tab.')
+     cy.get('#tree-item-4 > .k-link').click()
+     cy.get('#tree-item-4_0 > .k-link').click()
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').type('Ritchie Nathoe').wait(3000)
+     cy.get('.k-master-row > [data-col-index="1"]').contains('Ritchie Nathoe').dblclick().wait(3000)
+     cy.get(' .k-link > .svx-font-2').eq(3).click().wait(3000)
+     // 'Requirement having type 1' is visible (having default filters applied). The updated code is shown.
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Requirement having type 1').wait(3000)
+     cy.get('.k-master-row > [data-col-index="1"]').contains('Requirement having type 1')
+     
 
 
 
 
+    //  cy.log('cleanup')
+    //  cy.get('#tree-item-8_3 > .k-link').click()
+    //  cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').clear().type('Requirement type 1 changed').wait(3000)
+    //  cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
+    //  cy.get('.k-button-solid-primary').click()
 
-
-
-
-
+    //  cy.get('#tree-item-10 > .k-link').click()
+    //  cy.get('#tree-item-10_0 > .k-link').click()
+    //  cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Requirement having type 1').wait(3000)
+    //  cy.get('.k-master-row > [data-col-index="1"]').contains('Requirement having type 1')
+    //  cy.get('.k-master-row > [data-col-index="0"]').click()
+    //  cy.get('.k-button-solid-primary').click()
     })
     })
