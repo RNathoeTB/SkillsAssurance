@@ -9,7 +9,7 @@ describe('Requirements > Requirement Types', () => {
      cy.get('#tree-item-10 > .k-link').click()
      cy.get('#tree-item-10_0 > .k-link').click()
      cy.get('.svx-grid-footer-buttons > .svx-button > .telerik-blazor').click()
-     cy.get(':nth-child(2) > .svx-formfield-content > .input-group > .k-textbox').type('Duplicate').wait(3000)
+     cy.get('.svx-modal-body > :nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').type('Duplicate').wait(3000)
      cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
      //  Requirement type Prio1 & Prio 2 are created
      cy.get('#tree-item-8 > .k-link').click()
