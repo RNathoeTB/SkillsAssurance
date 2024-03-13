@@ -82,8 +82,8 @@ cy.log('4. Click on the bin icon of the just created/updated item.')
      cy.contains(' Are you sure you want to delete the selected item?').should('exist')
      //  'NO' and 'YES' buttons are available.
 cy.log('BUG: CANCEL & OK is available ')
-     //  cy.get('.k-actions').contains('NO')
-     //  cy.get('.k-actions').contains('YES')
+     cy.get('.k-actions').contains('NO')
+     cy.get('.k-actions').contains('YES')
 
 cy.log('5. Click \'Yes\'')
      cy.get('.k-button-solid-primary').click().wait(3000)
@@ -125,7 +125,7 @@ cy.log('BUG: "An unhandled error has occurred. Reload" message is shown')
      cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
      // The edit security group dialog is closed.
      // 'Save successful' notification message is shown.
-    //  cy.contains('Save succesful')
+     cy.contains('Save succesful')
 cy.log('BUG: "An unhandled error has occurred. Reload" message is shown')
 cy.log('BUG: "Save successful" notification message is not shown.')
 
@@ -186,6 +186,7 @@ cy.log('11. Go to Settings -> Security groups -> Admin security group-> Permissi
      cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
      // The edit security group dialog is closed.
      // 'Save successful' notification message is shown.
+     cy.contains('Save succesful')
 cy.log('BUG: "An unhandled error has occurred. Reload" message is shown')
 cy.log('BUG: "Save successful" notification message is not shown.')
 
@@ -272,6 +273,7 @@ cy.log('17. Go to Settings -> Security groups -> Admin security group-> Permissi
      cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
      // The edit security group dialog is closed.
      // 'Save successful' notification message is shown.
+     cy.contains('Save succesful')
 cy.log('BUG: "An unhandled error has occurred. Reload" message is shown')
 cy.log('BUG: "Save successful" notification message is not shown.')
 
@@ -285,7 +287,7 @@ cy.log('18. Re-login and navigate to the Requirement groups overview screen')
      cy.get('#tree-item-8_3 > .k-link').click().wait(3000)
      // 'Requirement groups' is no longer available in the submenu.
 cy.log('BUG: Requirement groups on tabs strip menu is STILL available')
-    //  cy.get('.k-panelbar-group').should('not.contain', 'Requirement types')
+     cy.get('.k-panelbar-group').should('not.contain', 'Requirement types')
 
 cy.log('cleanup: Delete REQ TYPE') 
      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').wait(3000).type('TC1056reqtypestep13').wait(3000)
