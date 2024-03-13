@@ -30,18 +30,26 @@ it('Permissions Handling of Requirement types ', () => {
 cy.log('1. Observe the screen ')
      cy.get('#tree-item-8 > .k-link').click()
      cy.get('#tree-item-8_3 > .k-link').click().wait(3000)
-     //  The grid with the list of created items is shown.
-
-
-
-
+     //  The grid with the list of created items is shown.`
+     cy.get('.k-grid-content').should('not.be.empty').then(($gridContent) => {
+        // Check if the grid content has child elements
+        expect($gridContent.children()).to.have.length.above(0);
+     })
      // Each record contains a 'Bucket' icon.
-
-
+     cy.get('.grid-pagination-information > label').invoke('text').then(labelText => {
+        // Extract the number of items/rows from the label text
+        const numberOfItems = parseInt(labelText.match(/\d+/)[0], 10);
+      
+        // Get the count of delete buttons
+        cy.get('.k-grid-content [data-col-index="0"] > .k-button > .telerik-blazor').its('length').then(deleteButtonCount => {
+          // Assert that the number of items/rows is equal to the count of delete buttons
+          expect(numberOfItems).to.equal(deleteButtonCount);
+        });
+      });
 
      // 'ADD' button is present.
      cy.get('.svx-grid-footer-buttons > :nth-child(1) > .telerik-blazor').should('exist').contains('Add')
-
+cy.pause()
 cy.log('2. Click \'ADD\', fill all required fields and click \'SAVE\'')
      cy.get('.svx-grid-footer-buttons > :nth-child(1) > .telerik-blazor').click()
      cy.get('.svx-modal-body > :nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').find('.k-input-inner').type('TC1056reqtype')
@@ -76,7 +84,6 @@ cy.log('4. Click on the bin icon of the just created/updated item.')
 cy.log('BUG: CANCEL & OK is available ')
      //  cy.get('.k-actions').contains('NO')
      //  cy.get('.k-actions').contains('YES')
-
 
 cy.log('5. Click \'Yes\'')
      cy.get('.k-button-solid-primary').click().wait(3000)
