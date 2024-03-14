@@ -4,11 +4,19 @@ describe('Requirements > Organizational unit groups', () => {
      cy.get('#Username').type('Richard')
      cy.get('#Password').type('Test123')
      cy.get('#Login').click()
+    //  create Req Gr
+    cy.get('#tree-item-8 > .k-link').click()
+    cy.get('#tree-item-8_1 > .k-link').click()
+    cy.get('.svx-grid-footer-buttons > .svx-button > .telerik-blazor').click()
+    cy.get('.dismiss').click()
+    cy.get(':nth-child(1) > .svx-formfield-content > .input-group > .k-textbox').type('RNanyrecord')
+    cy.get('.k-multiselect').type('Europe').wait(2000).type('{enter}')
+    cy.get('.k-multiselect').click()
+    cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click().wait(3000)
     })
     
 it('Add Organizational Unit Groups', () => {
      cy.log('1. Observe the grid ')
-     cy.get('#tree-item-8 > .k-link').click()
      cy.get('#tree-item-8_4 > .k-link').click()
      // Grid contains 5 columns:
      // - 'Name'
@@ -80,24 +88,59 @@ cy.log('4. Click \'ADD\', enter \'Name\' = \'Organisational unit group 1\', popu
      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').clear().type('Organisational unit group 1').wait(3000)
      cy.get('[data-render-row-index="2"] > [data-col-index="1"]').contains('Organisational unit group 1')
      cy.get('[data-render-row-index="2"] > [data-col-index="2"]').contains('Description')
+
+cy.log('step 5 and step6 Not possible')
    
+cy.log('7 & 8. Navigate to MANAGE -> Requirements -> Requirement groups and open an existing record. Click on the Organizational unit groups field. Select \'Organizational unit group 1\' and click \'SAVE\'')
+     cy.get('#tree-item-8_1 > .k-link').click()
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('RNanyrecord').wait(3000)
+     cy.get('[data-render-row-index="2"] > [data-col-index="1"]').contains('RNanyrecord').dblclick()
+     //  The 'Organizational unit group 1' is visible for selection.
+     cy.get('.k-multiselect').type('Organisational unit group 1').wait(2000).type('{enter}')
+     cy.get('.k-multiselect').click()
+     cy.get('.dismiss').click()
+     cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click().wait(3000)
+     //  The pop-up dialog is closed.
+     //  The user is redirected to the 'Requirement groups' overview screen.
+     cy.get('.svx-page-header-title').contains('Requirement groups')
+     //  The grid list is updated showing the newly assigned Organizational unit group info in the grid.
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('RNanyrecord').wait(3000)
+     cy.get('.k-master-row > [data-col-index="4"]').contains('Organisational unit group 1')
 
+cy.log('9. Navigate to MANAGE -> Requirements -> Organizational unit groups and open \'Organizational unit group 1\' and observe.')
+     cy.get('#tree-item-8_4 > .k-link').click()
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('Organisational unit group 1').wait(3000)
+     cy.get('.k-master-row > [data-col-index="1"]').dblclick()
+     // The 'Requirement groups' field shows the requirement group name as assigned to this OU group in step 7-8.
+     cy.get(':nth-child(5) > .svx-formfield-content > .k-multiselect').contains('RNanyrecord')
 
+cy.log('10. Add an additional requirement group in the \'Requirement groups\' field and click \'SAVE\'')
+     cy.get(':nth-child(5) > .svx-formfield-content > .k-multiselect').type('Americas').wait(4000).type('{enter}')
+     cy.get(':nth-child(5) > .svx-formfield-content > .k-multiselect').find('.k-input-inner').click()
+     cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
+     //  The pop-up dialog is closed.
+     //  The user is redirected to the 'Requirement groups' overview screen.
+     cy.get('.svx-page-header-title').contains('Organizational unit groups')
+     //  The grid list is updated showing the 2 assigned Requirement groups in the grid.
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').clear().wait(3000).type('Organisational unit group 1').wait(3000)
+     cy.get('.k-master-row > [data-col-index="5"]').contains('RNanyrecord')
+     cy.get('.k-master-row > [data-col-index="5"]').contains('Americas')
 
+     cy.log('Cleanup')
+     cy.get('#tree-item-8_1 > .k-link').click()
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('RNanyrecord').wait(3000)
+     cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
+     cy.get('.k-button-solid-primary').click().wait(3000)
 
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').clear().type('Americas').wait(3000)
+     cy.get('[data-render-row-index="2"] > [data-col-index="1"]').dblclick()
+     cy.get('.k-input-values').find('.k-input-inner').click().type('{backspace}').wait(3000).click()
+     cy.get('.dismiss').click()
+     cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+     cy.get('#tree-item-8_4 > .k-link > .k-item-text').click()
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').wait(3000).type('Organisational unit group 1').wait(3000)
+    cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
+    cy.get('.k-button-solid-primary').click()
     })
     })
