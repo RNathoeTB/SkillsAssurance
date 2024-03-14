@@ -138,7 +138,8 @@ cy.log('10. Add an additional requirement group in the \'Requirement groups\' fi
      cy.get('.dismiss').click()
      cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
 
-     cy.get('#tree-item-8_4 > .k-link > .k-item-text').click()
+     cy.get('#tree-item-8_4 > .k-link > .k-item-text').click().wait(3000)
+     cy.get('#tree-item-8_4 > .k-link > .k-item-text').click().wait(3000)
      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').wait(3000).type('Organisational unit group 1').wait(3000)
     cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
     cy.get('.k-button-solid-primary').click()
