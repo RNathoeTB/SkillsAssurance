@@ -10,7 +10,7 @@ describe('Requirements > Organizational unit groups', () => {
      cy.get('.svx-grid-footer-buttons > .svx-button > .telerik-blazor').click()
      cy.get('.svx-block-body > :nth-child(2) > .svx-formfield-content > .input-group > .k-textbox').type('RNTesting').wait(3000)
      cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
-    //  //  create OUG
+     //  create OUG
      cy.get('#tree-item-8 > .k-link').click()
      cy.get('#tree-item-8_4 > .k-link').click()
      cy.get('.svx-grid-footer-buttons > .svx-button > .telerik-blazor').click()
@@ -64,7 +64,7 @@ cy.log('4. Re-open the record, change the Organizational Units selection (remove
      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').clear().wait(3000).type('Organizational unit group 1').wait(3000)
      cy.get('.k-master-row > [data-col-index="3"]').contains('RNTesting')
 
-cy.log('step 5 6 7 9 Bug in application')
+cy.log('step 5 6 7 Bug in application')
      cy.get('#tree-item-11 > .k-link').click()
      cy.get('#tree-item-11_1 > .k-link').click()
 
@@ -73,7 +73,7 @@ cy.log('8. Navigate to MANAGE -> Requirements -> Organizational unit groups and 
      cy.get('#tree-item-8_4 > .k-link').click()
      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').wait(3000).type('Organizational unit group 1').wait(3000) 
      cy.get('.k-master-row > [data-col-index="3"]').dblclick()
-     cy.get('.k-switch-track').click()
+     cy.get('.k-switch-track').click().wait(3000)
      cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click()
      // The user is redirected to the Organizational Unit overview screen.
      cy.get('.svx-page-header-title').contains('Organizational unit groups')
@@ -86,35 +86,43 @@ cy.log('9. Bug in application')
      cy.get('#tree-item-11_1 > .k-link').click()
 
 cy.log('10. Navigate to MANAGE -> Requirements -> Organizational unit groups and open \'Organizational unit group 1\'. Add an additional requirement group and click \'SAVE\'')
-     cy.get('#tree-item-8 > .k-link').click()
-     cy.get('#tree-item-8_4 > .k-link').click()
-     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').wait(3000).type('Organizational unit group 1').wait(3000) 
-     cy.get('.k-master-row > [data-col-index="3"]').dblclick()
+      cy.get('#tree-item-8 > .k-link').click()
+      cy.get('#tree-item-8_4 > .k-link').click()
+      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').wait(3000).type('Organizational unit group 1').wait(3000) 
+      cy.get('.k-master-row > [data-col-index="3"]').dblclick()
+      cy.get(':nth-child(5) > .svx-formfield-content > .k-multiselect').find('.k-input-inner').wait(3000).type('Americas').wait(3000).type('{enter}')
+      cy.get(':nth-child(5) > .svx-formfield-content > .k-multiselect').find('.k-input-inner').click()
+      cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click().wait(3000)
+      // The user is redirected to the Organizational Unit overview screen.
+      cy.get('.svx-page-header-title').contains('Organizational unit groups')
+      // The change on the OU group record has been successfully saved and shows updated in the grid.
+      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').clear().wait(3000).type('Organizational unit group 1').wait(3000)
+      cy.get('.k-master-row > [data-col-index="5"]').contains('Americas')
 
+cy.log('11. Navigate to MANAGE -> Requirements -> Requirement groups and open the group that was added in step 10. Observe the info.')
+      cy.get('#tree-item-8_1 > .k-link').click()
+      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').wait(3000).type('Americas').wait(3000)
+      cy.get('.k-master-row > [data-col-index="1"]').contains('Americas').dblclick()
+      cy.get('.k-input-values').contains('Organizational unit group 1')
+      cy.get('.dismiss').click()
+      cy.get('.modal-buttons > :nth-child(1) > .telerik-blazor').click()
 
+     cy.log('Cleanup')
+     cy.get('#tree-item-8_4 > .k-link > .k-item-text').click().wait(3000)
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').wait(3000).type('Organizational unit group 1').wait(3000)
+     cy.get('.k-master-row > [data-col-index="1"]').dblclick()
+     cy.get(':nth-child(3) > .svx-formfield-content > .k-multiselect').find('.k-input-inner').click().wait(3000).type('{backspace}').click()
+     cy.get(':nth-child(5) > .svx-formfield-content > .k-multiselect').find('.k-input-inner').click().wait(3000).type('{backspace}').click()
+     cy.get('.svx-modal-buttons > :nth-child(2) > .telerik-blazor').click().wait(3000)
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').clear().wait(3000).type('Organizational unit group 1').wait(3000)
+     cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
+     cy.get('.k-button-solid-primary').click()
 
-
-
-
-
-
-    //  cy.log('Cleanup')
-    //  cy.get('#tree-item-8_1 > .k-link').click()
-    //  cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('RNanyrecord').wait(3000)
-    //  cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
-    //  cy.get('.k-button-solid-primary').click().wait(3000)
-
-    //  cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').clear().type('Americas').wait(3000)
-    //  cy.get('[data-render-row-index="2"] > [data-col-index="1"]').dblclick()
-    //  cy.get('.k-input-values').find('.k-input-inner').click().type('{backspace}').wait(3000).click()
-    //  cy.get('.svx-page-header').click()
-    //  cy.get('.dismiss').click()
-    //  cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
-
-    //  cy.get('#tree-item-8_4 > .k-link > .k-item-text').click().wait(3000)
-    //  cy.get('#tree-item-8_4 > .k-link > .k-item-text').click().wait(3000)
-    //  cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').wait(3000).type('Organisational unit group 1').wait(3000)
-    //  cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
-    //  cy.get('.k-button-solid-primary').click()
+     cy.get('#tree-item-11 > .k-link').click()
+     cy.get('#tree-item-11_1 > .k-link').click()
+     cy.get('.svx-organisational-unit-header-buttons > :nth-child(2) > .svx-button > .k-button').click().wait(3000)
+     cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').wait(3000).type('RNTesting').wait(3000)
+     cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
+     cy.get('.k-button-solid-primary').click()
     })
     })
