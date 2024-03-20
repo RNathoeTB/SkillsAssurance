@@ -333,7 +333,7 @@ describe('Organizational Units', () => {
 
   })
 
-  it.only('Permissions Handling of Organizational Units', () => {
+  it('Permissions Handling of Organizational Units', () => {
 
     //precondition
     //2. Click 'ADD', fill all required fields and click 'SAVE'
