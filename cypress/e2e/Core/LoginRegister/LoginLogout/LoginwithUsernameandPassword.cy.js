@@ -18,7 +18,7 @@ describe('Login & Logout', () => {
     cy.contains('Wrong username or password').should('be.visible')
 
     cy.log('4. Change the password by entering the valid password and click Login')
-    cy.get('#Password').type('Nathoe')
+    cy.get('#Password').type('Test123')
     cy.get('#Login').click()
     cy.contains('Dashboard').should('be.visible')
     
@@ -30,7 +30,7 @@ describe('Login & Logout', () => {
     cy.contains('Welcome back').should('be.visible')
     cy.contains('Use the username provided by your company.').should('be.visible')
     cy.get('#Username').type('Richard')
-    cy.get('#Password').type('Nathoe')
+    cy.get('#Password').type('Test123')
     cy.get('#Login').click()
 
     cy.log('1. Click on the Avatar in the top part of the menu')
