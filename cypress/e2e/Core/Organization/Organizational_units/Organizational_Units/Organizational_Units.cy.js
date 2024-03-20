@@ -1,4 +1,4 @@
-describe('Roles', () => {
+describe('Organizational Units', () => {
     beforeEach(() => {
       // Voeg hier de stappen toe die je voor elke test wilt uitvoeren
       cy.log('Login')
@@ -125,7 +125,7 @@ describe('Roles', () => {
     })
 
 
-    it.only('Edit Organizational Units', () => {
+    it('Edit Organizational Units', () => {
 
         //Pre condition Add OU
         cy.contains('span.k-button-text', 'Add').click()
@@ -277,4 +277,68 @@ describe('Roles', () => {
             
     })
       
+    it('Validation on Add/Edit Organizational Units', () => {
+
+      //precondition
+      //Menu -> Manage section -> Organisation -> Organisational units, click 'Add' button
+      cy.contains('span.k-button-text', 'Add').click()
+      //1. Do not fill any field in and click 'SAVE' button 
+      cy.contains('Save').click()
+      cy.get('.svx-block-body > :nth-child(2) > .svx-formfield-content > .input-group > .k-textbox').should('have.css', 'border-color', 'rgb(213, 25, 35)')
+      cy.get('.svx-block-body > :nth-child(2) > .svx-formfield-content > .input-group > .k-textbox').click()
+      cy.log('BUG: different message is shown: The Name is a required field')
+      //cy.get('.k-child-animation-container > .telerik-blazor').contains('Name is a required field')
+
+      //2. Enter 'OU 1' into 'Name' field and click 'SAVE' button
+      const Name = 'OU 1'
+      cy.get('input.k-input-inner').eq(0).clear().type(Name);
+      cy.wait(3000)
+      //Click Save
+      cy.contains('span.k-button-text', 'Save').click();
+      cy.contains(Name).dblclick();
+
+      cy.log('Bug')
+      //3. Double-click on just created item 'OU 1' and within Parent field select 'Parent 1'
+      //cy.get('input.k-input-inner').eq(2).clear().type('Parent 1');
+      //cy.wait(3000)
+
+      //4. Rename the OU by entering a name that contains 256 or more characters and click 'SAVE'
+      const longName = 'a'.repeat(257)
+      cy.get('input.k-input-inner').eq(0).clear().type(longName);
+      cy.contains('span.k-button-text', 'Save').click();
+      cy.get('.svx-block-body > :nth-child(2) > .svx-formfield-content > .input-group > .k-textbox').click()
+      cy.log('Bug')
+      //cy.get('.k-child-animation-container > .telerik-blazor').contains('Name has a maximum of 255 characters.')  
+
+      //5. Provide valid OU name (255 or less characters and not yet existing) and click 'SAVE' button 
+      cy.get('input.k-input-inner').eq(0).clear().type(Name);
+      cy.wait(3000)
+      //Click Save
+      cy.contains('span.k-button-text', 'Save').click();
+      cy.wait(3000)
+      cy.contains(Name).dblclick();
+
+      //6. Reopen item and enter a code that contains 256 or more characters and click 'SAVE'
+      cy.get('input.k-input-inner').eq(1).clear().type(longName);
+      cy.contains('span.k-button-text', 'Save').click();
+      cy.get('.svx-block-body > :nth-child(3) > .svx-formfield-content > .input-group > .k-textbox').click() 
+      cy.log('Bug')
+      //cy.get('.k-child-animation-container > .telerik-blazor').contains('Code has a maximum of 255 characters')  
+
+      //7. Provide valid code (255 or less characters) and click 'SAVE' button 
+      cy.get('input.k-input-inner').eq(1).clear().type(Name);
+      cy.contains('span.k-button-text', 'Save').click();
+      cy.contains(Name).dblclick();
+
+
+  })
+
+  it.only('Permissions Handling of Organizational Units', () => {
+
+    //precondition
+    
+
+
+})
+    
 })
