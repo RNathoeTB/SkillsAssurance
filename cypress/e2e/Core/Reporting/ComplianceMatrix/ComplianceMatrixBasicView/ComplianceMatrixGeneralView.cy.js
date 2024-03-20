@@ -30,7 +30,7 @@ describe('Reporting', () => {
         cy.contains('Organizational unit').should('exist')
         cy.log('Bug') //Evidencis column is not shown
         //cy.contains('Evidences').should('exist')
-        //try
+
 
         //3. Click on different personal information columns
         cy.log('Bug') //Colums are not sorted when clicked on
