@@ -182,7 +182,7 @@ describe('Reporting', () => {
 
     }) 
 
-    it.only('Grade Levels Filter', () => {
+    it('Grade Levels Filter', () => {
     
     cy.log('1. Observe Filter')
         cy.get('label[class=""]').contains('Grade levels').should('exist');
@@ -229,6 +229,74 @@ describe('Reporting', () => {
         cy.get('td[role="gridcell"]').contains('PB Main Role A').should('exist');
         cy.get('td[role="gridcell"]').contains('Crane Operator').should('exist');
                 
+
+    }) 
+
+    it('Employees Filter', () => {
+        cy.log('1. Observe Filter')
+        cy.get('label[class=""]').contains('Employees').should('exist');    
+        cy.get('label[class=""]').contains('Include inactive').should('exist');
+    
+    cy.log('2. Fill no additional fields. Click \'Apply\'')
+        cy.log('this is already checked in other testcase')
+
+    cy.log('3. Open Filter. In \'Employees\' field pick two employees. Click \'Apply\'. ')
+        cy.get('.svx-filter-content').find('.k-input-inner').eq(5).click({force: true}).type('Ritchie Nathoe ()', {force: true}).wait(2000).type('{enter}',{force: true})
+        cy.get('.svx-filter-content').find('.k-input-inner').eq(5).click({force: true}).type('Test Automation 1 ()', {force: true}).wait(2000).type('{enter}',{force: true})
+        cy.contains('span.k-button-text', 'Apply').click({ force: true });
+        cy.wait(5000)
+        
+        cy.get('td[role="gridcell"]').contains('Ritchie Nathoe ()').should('exist'); 
+        cy.get('td[role="gridcell"]').contains('Test Automation 1 ()').should('exist');
+        cy.get('td[role="gridcell"]').contains('Crane Operator').should('not.exist');
+
+    cy.log('4. Open Filter. In \'Employees\' field remove one of the selected employees. Click \'Apply\'.  ')
+        cy.wait(3000)
+        cy.contains('span.k-button-text', 'Filter').click().wait(3000);
+        cy.contains('div.title', 'Employee filter').should('exist');
+        cy.wait(3000)
+
+        cy.get('span.k-clear-value').eq(0).click({ force: true });
+        cy.get('.svx-filter-content').find('.k-input-inner').eq(5).click({force: true}).type('Test Automation 1 ()', {force: true}).wait(2000).type('{enter}',{force: true})
+
+        cy.contains('span.k-button-text', 'Apply').click({ force: true });
+        cy.wait(5000)
+
+        cy.get('td[role="gridcell"]').contains('Ritchie Nathoe ()').should('not.exist'); 
+        cy.get('td[role="gridcell"]').contains('Test Automation 1 ()').should('exist');
+
+    cy.log('5. Open Filter. Clear \'Employees\' field. Click \'Apply\'.  ')
+        cy.wait(3000)
+        cy.contains('span.k-button-text', 'Filter').click().wait(3000);
+        cy.contains('div.title', 'Employee filter').should('exist');
+        cy.wait(3000)
+
+        cy.get('span.k-clear-value').eq(0).click({ force: true });
+        cy.contains('span.k-button-text', 'Apply').click({ force: true });
+        cy.get('td[role="gridcell"]').contains('Role 2').should('exist');
+        cy.get('td[role="gridcell"]').contains('PB Main Role A').should('exist');
+        cy.get('td[role="gridcell"]').contains('Crane Operator').should('exist');
+
+    cy.log('6. Open Filter. Check \'Include inactive\' checkbox. Click \'Apply\'. ')
+        cy.wait(3000)
+        cy.contains('span.k-button-text', 'Filter').click().wait(3000);
+        cy.contains('div.title', 'Employee filter').should('exist');
+        cy.wait(3000)
+
+        cy.contains('label', 'Include inactive').click({ force: true });
+        cy.contains('span.k-button-text', 'Apply').click({ force: true });
+        
+        cy.get('td[role="gridcell"]').contains('Role 3 ()').should('exist');
+
+    cy.log('7. Open Filter dropdown. Uncheck \'Include inactive\' checkbox. Click \'Apply\'. ')
+        cy.wait(3000)
+        cy.contains('span.k-button-text', 'Filter').click().wait(3000);
+        cy.contains('div.title', 'Employee filter').should('exist');
+        cy.wait(3000)
+
+        cy.contains('label', 'Include inactive').click({ force: true });
+        cy.contains('span.k-button-text', 'Apply').click({ force: true });
+        cy.get('td[role="gridcell"]').contains('Test Automation 1 ()').should('exist');
 
     }) 
   
