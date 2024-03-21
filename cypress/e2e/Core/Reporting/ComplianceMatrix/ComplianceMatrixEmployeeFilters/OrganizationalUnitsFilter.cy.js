@@ -133,5 +133,54 @@ describe('Reporting', () => {
 
     })
   
+    it('Personnel Types Filter', () => {
+
+    cy.log('1. Observe Filter')
+        cy.get('label[class=""]').contains('Personnel types').should('exist');
+
+    cy.log('2. Fill no additional fields. Click \'Apply')
+        cy.log('this is already checked in other testcase')
+    
+    cy.log('3. Open Filter dropdown. In \'Personnel Types\' field pick \'Personnel Type 1\' and \'Personnel type 2\'. Click \'Apply\'.')
+        cy.get('.svx-filter-content').find('.k-input-inner').eq(2).click({force: true}).type('PB Personnel type A', {force: true}).wait(2000).type('{enter}',{force: true})
+        cy.get('.svx-filter-content').find('.k-input-inner').eq(2).click({force: true}).type('PB Personnel type B', {force: true}).wait(2000).type('{enter}',{force: true})
+        cy.contains('span.k-button-text', 'Apply').click({ force: true });
+        cy.wait(5000)
+        
+        cy.log('Bug') //Personal type column is not shown. 
+        cy.get('td[role="gridcell"]').contains('Ritchie Nathoe ()').should('exist'); 
+        cy.get('td[role="gridcell"]').contains('Test Automation 1 ()').should('exist');
+        cy.get('td[role="gridcell"]').contains('Crane Operator').should('not.exist');
+
+    cy.log('4. Open Filter dropdown. In \'Personnel Types\' field remove \'Personnel Type 2\'.Click \'Apply\'.')
+        cy.wait(3000)
+        cy.contains('span.k-button-text', 'Filter').click().wait(3000);
+        cy.contains('div.title', 'Employee filter').should('exist');
+        cy.wait(3000)
+
+        cy.get('span.k-clear-value').eq(0).click({ force: true });
+        cy.get('.svx-filter-content').find('.k-input-inner').eq(2).click({force: true}).type('PB Personnel type A', {force: true}).wait(2000).type('{enter}',{force: true})
+
+        cy.contains('span.k-button-text', 'Apply').click({ force: true });
+        cy.wait(5000)
+
+        cy.get('td[role="gridcell"]').contains('Ritchie Nathoe ()').should('not.exist'); 
+        cy.get('td[role="gridcell"]').contains('Test Automation 1 ()').should('exist');
+    
+    cy.log('5. Open Filter dropdown. Clear \'Personnel Types\' field. Click \'Apply\'. ')
+        cy.wait(3000)
+        cy.contains('span.k-button-text', 'Filter').click().wait(3000);
+        cy.contains('div.title', 'Employee filter').should('exist');
+        cy.wait(3000)
+
+        cy.get('span.k-clear-value').eq(0).click({ force: true });
+        cy.contains('span.k-button-text', 'Apply').click({ force: true });
+        cy.get('td[role="gridcell"]').contains('Role 2').should('exist');
+        cy.get('td[role="gridcell"]').contains('PB Main Role A').should('exist');
+        cy.get('td[role="gridcell"]').contains('Crane Operator').should('exist');
+
+    }) 
+
+
   
   })
