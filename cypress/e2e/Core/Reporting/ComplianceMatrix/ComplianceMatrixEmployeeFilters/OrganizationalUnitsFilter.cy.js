@@ -300,4 +300,38 @@ describe('Reporting', () => {
 
     }) 
   
+    it('Include Without Requirements Filter', () => {
+    cy.log('1. Observe Filter')
+        cy.contains('span[title="Employees without requriements can\'t be displayed when filtering on specific evidences"]', 'without requirements').should('exist')
+   
+    cy.log('2. Fill no additional fields. Click \'Apply\'')
+        cy.log('this is already checked in other testcase')
+
+    cy.log('3. Open Filter. Check \'Include without requirements\' checkbox. Click \'Apply\'.')
+        cy.contains('span[title="Employees without requriements can\'t be displayed when filtering on specific evidences"]', 'without requirements').click({ force: true });
+        cy.contains('span.k-button-text', 'Apply').click({ force: true });
+        cy.get('td[role="gridcell"]').contains('Frederike Lindeyer ()').should('exist');
+    
+    cy.log('4. Open Filter. Fill in \'OU 3\' in Organizational unit field. Click \'Apply\'. ')
+        cy.wait(3000)
+        cy.contains('span.k-button-text', 'Filter').click().wait(3000);
+        cy.contains('div.title', 'Employee filter').should('exist');
+        cy.wait(3000)
+
+        cy.get('.svx-filter-content').find('.k-input-inner').eq(0).click({force: true}).type('OU 2', {force: true}).wait(2000).type('{enter}',{force: true})
+        cy.contains('span.k-button-text', 'Apply').click({ force: true });
+        cy.get('td[role="gridcell"]').contains('Test Automation 2 ()').should('exist');
+
+    cy.log('5. Open Filter. Uncheck \'Include without requirements\' checkbox. Click \'Apply\'. ')
+        cy.wait(3000)
+        cy.contains('span.k-button-text', 'Filter').click().wait(3000);
+        cy.contains('div.title', 'Employee filter').should('exist');
+        cy.wait(3000)
+        
+        cy.get('span.k-clear-value').eq(0).click({ force: true });
+        cy.contains('span[title="Employees without requriements can\'t be displayed when filtering on specific evidences"]', 'without requirements').click({ force: true });
+        cy.contains('span.k-button-text', 'Apply').click({ force: true });
+        cy.get('td[role="gridcell"]').contains('Test Automation 1 ()').should('exist');
+
+    }) 
   })
