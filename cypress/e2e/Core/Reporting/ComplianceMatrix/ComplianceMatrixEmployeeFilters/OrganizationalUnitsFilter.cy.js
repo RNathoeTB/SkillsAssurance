@@ -100,7 +100,7 @@ describe('Reporting', () => {
         cy.wait(5000)
 
         cy.log('Bug') //Main role PB does not exist. 
-        //cy.contains('PB Main Role A').should('exist')
+        cy.contains('PB Main Role A').should('exist')
         cy.contains('Role 1').should('not.exist')
     
     cy.log('Open Filter. In \'Roles\' field remove \'Role 2\'. Click \'Apply\'. ')
