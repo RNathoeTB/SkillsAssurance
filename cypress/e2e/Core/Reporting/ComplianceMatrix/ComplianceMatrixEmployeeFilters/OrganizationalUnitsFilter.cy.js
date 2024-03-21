@@ -334,4 +334,48 @@ describe('Reporting', () => {
         cy.get('td[role="gridcell"]').contains('Test Automation 1 ()').should('exist');
 
     }) 
+
+    it.only('Crews Filter', () => {
+    cy.log('1. Observe Filter')
+        cy.get('label[class=""]').contains('Crews').should('exist');   
+    
+    cy.log('2. Fill no additional fields. Click \'Apply\'')
+        cy.log('this is already checked in other testcase')
+    
+    cy.log('3. Open Filter dropdown.In \'Crews\' field pick \'Crew 1\' and \'Crew 2\'.Click \'Apply\'. ')
+        cy.get('.svx-filter-content').find('.k-input-inner').eq(4).click({force: true}).type('Crew A', {force: true}).wait(2000).type('{enter}',{force: true})
+        cy.get('.svx-filter-content').find('.k-input-inner').eq(4).click({force: true}).type('CREW TEST 2', {force: true}).wait(2000).type('{enter}',{force: true})
+        cy.contains('span.k-button-text', 'Apply').click({ force: true });
+        cy.wait(5000)
+        
+        cy.get('td[role="gridcell"]').contains('Ritchie Nathoe ()').should('exist'); 
+        cy.get('td[role="gridcell"]').contains('Test Automation 1 ()').should('not.exist');
+        cy.get('td[role="gridcell"]').contains('Rich Nathoe ()').should('exist');
+
+    cy.log('4. Open Filter dropdown. In \'Grade levels\' field remove \'Crew 2\'.Click \'Apply\'. ')
+        cy.wait(3000)
+        cy.contains('span.k-button-text', 'Filter').click().wait(3000);
+        cy.contains('div.title', 'Employee filter').should('exist');
+        cy.wait(3000)
+        cy.get('span.k-clear-value').eq(0).click({ force: true });
+        cy.get('.svx-filter-content').find('.k-input-inner').eq(4).click({force: true}).type('CREW TEST 2', {force: true}).wait(2000).type('{enter}',{force: true})
+
+        cy.contains('span.k-button-text', 'Apply').click({ force: true });
+        cy.wait(5000)
+
+        cy.get('td[role="gridcell"]').contains('Ritchie Nathoe ()').should('not.exist'); 
+
+    cy.log('5. Open Filter dropdown. Clear \'Crews\' field. Click \'Apply\'. ')
+        cy.wait(3000)
+        cy.contains('span.k-button-text', 'Filter').click().wait(3000);
+        cy.contains('div.title', 'Employee filter').should('exist');
+        cy.wait(3000)
+        
+        cy.get('span.k-clear-value').eq(0).click({ force: true });
+        cy.contains('span.k-button-text', 'Apply').click({ force: true });
+        cy.get('td[role="gridcell"]').contains('Test Automation 1 ()').should('exist');
+
+
+    })  
+
   })
