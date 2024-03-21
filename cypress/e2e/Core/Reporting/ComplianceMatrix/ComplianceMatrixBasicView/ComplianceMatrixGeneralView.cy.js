@@ -116,8 +116,6 @@ describe('Reporting', () => {
 
     })
 
-
-
     it('Permissions Handling of Compliance Matrix', () => {
 
     cy.log('1. Observe the screen')
