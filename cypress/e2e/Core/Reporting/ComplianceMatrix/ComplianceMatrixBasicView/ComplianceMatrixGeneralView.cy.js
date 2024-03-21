@@ -115,6 +115,45 @@ describe('Reporting', () => {
         cy.contains('div.title', textToFind).should('exist');
 
     })
+
+
+
+    it.only('Permissions Handling of Compliance Matrix', () => {
+
+    cy.log('1. Observe the screen')
+      cy.contains('span.k-button-text', 'Add').should('not.exist')
+      cy.get('span.telerik-blazor.k-button-icon.k-icon.k-font-icon.k-i-trash[aria-hidden="true"]').should('not.exist')
+
+    cy.log('2. Go to Settings -> Security groups -> Admin security group-> Permissions tab -> Core sub-tab')
+      cy.get('span.k-item-text').contains('Settings').click();
+      cy.contains('div', 'Security groups').click();
+      cy.contains('td', 'Admin settings').dblclick();
+      cy.contains('Permissions').click();
+      cy.contains('Core').click();
+    
+    cy.log('3. Click on the control and click \'SAVE\' button')
+      cy.get('span.k-switch[aria-checked="true"]').eq(1).then(($switch) => {
+        const ariaChecked = $switch.attr('aria-checked');
+        if (ariaChecked !== 'false') {
+          cy.wrap($switch).click();
+        }
+      });
+      
+      // After clicking, verify if aria-checked is false
+      cy.get('span.k-switch[aria-checked="false"]').should('exist');
+      cy.contains('Save').click();
+
+    cy.log('4. Re-login and navigate to Reporting menu and observe submenu options  ')
+      cy.get('.profile-picture').click()
+      cy.contains('Logout').click()
+      cy.get('#Username').type('Richard')
+      cy.get('#Password').type('Test123')
+      cy.get('#Login').click()
+
+      cy.contains('span.k-item-text', 'Reporting').click(); 
+      cy.contains('span.k-item-text', 'Compliance matrix').should('not.exist');
+
+    })
   
   
   })
