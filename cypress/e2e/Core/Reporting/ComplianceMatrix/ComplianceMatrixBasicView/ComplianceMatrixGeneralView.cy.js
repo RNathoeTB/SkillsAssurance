@@ -118,7 +118,7 @@ describe('Reporting', () => {
 
 
 
-    it.only('Permissions Handling of Compliance Matrix', () => {
+    it('Permissions Handling of Compliance Matrix', () => {
 
     cy.log('1. Observe the screen')
       cy.contains('span.k-button-text', 'Add').should('not.exist')
