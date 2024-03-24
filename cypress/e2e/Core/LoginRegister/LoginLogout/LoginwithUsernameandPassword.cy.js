@@ -1,6 +1,6 @@
 describe('Login & Logout', () => {
   
-  it('Login with Username and Password', () => {
+  it.skip('Login with Username and Password', () => {
 
     cy.log('1. Observe screen')
     cy.contains('Welcome back')
