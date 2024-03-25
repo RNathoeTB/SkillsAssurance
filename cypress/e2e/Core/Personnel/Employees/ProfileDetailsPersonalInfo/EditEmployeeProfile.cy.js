@@ -104,5 +104,9 @@ cy.log('13. Click \'Cancel\' and observe the grid')
      // Updated information is correctly showing within the respective columns.
      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').type('First name changed Last name changed').wait(3000)
      cy.get('.k-master-row > [data-col-index="1"]').contains('Mrs. First name changed Last name changed ()')
+     
+     cy.log('cleanup')
+     cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
+     cy.get('.k-button-solid-primary').click()
     })  
     })
