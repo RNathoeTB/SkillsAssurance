@@ -1,4 +1,4 @@
-describe('Personnel -> Employees', () => {
+describe('Personnel -> Employees -> Creation Forms', () => {
     beforeEach(() => {
      cy.log('Login')
      cy.get('#Username').type('Richard')
@@ -90,11 +90,11 @@ cy.log('6. ')
      cy.get('.svx-column-block-left > :nth-child(1) > .svx-block-body > :nth-child(4) > .k-card > .k-card-body').contains('OU 1')
      cy.get('.svx-column-block-right > .svx-block > .svx-block-body > :nth-child(1) > .k-card > .k-card-body').contains('Status 1')
  
-cy.log('cleanup')
-cy.get('#tree-item-4_0 > .k-link').click().wait(5000)
-cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('First name ').wait(3000)
-cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
-cy.get('.k-button-solid-primary').click()
+// cy.log('cleanup')
+// cy.get('#tree-item-4_0 > .k-link').click().wait(5000)
+// cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').type('First name ').wait(3000)
+// cy.get('.k-master-row > [data-col-index="0"] > .k-button > .telerik-blazor').click()
+// cy.get('.k-button-solid-primary').click()
 
     })
     })
