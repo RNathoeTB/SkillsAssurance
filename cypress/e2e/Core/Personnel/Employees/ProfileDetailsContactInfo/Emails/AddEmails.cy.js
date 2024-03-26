@@ -4,7 +4,7 @@ describe('Personnel -> Employees -> Profile Details Contact Info', () => {
      cy.get('#Username').type('Richard')
      cy.get('#Password').type('Test123')
      cy.get('#Login').click()   
-    // An employee is already created with all personal fields filled
+    // An employee is already created, no email is added
      cy.get('#tree-item-4 > .k-link').click()
      cy.get('#tree-item-4_0 > .k-link').click().wait(3000)
      cy.get('.svx-grid-footer-buttons > .svx-button > .telerik-blazor').click()
@@ -14,7 +14,7 @@ describe('Personnel -> Employees -> Profile Details Contact Info', () => {
      cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').wait(3000).click().wait(5000)
     })
     
-it('Edit Employee Profile - Personal Info', () => {
+it('Emails -> Add Email(s)', () => {
 cy.log('1. Observe Contact Info section and click on Email(s) ')
      cy.get('#tree-item-4_0 > .k-link').click().wait(3000)
      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').type('AddEmail').wait(5000)
@@ -45,7 +45,7 @@ cy.log('3. Click on (+) Add email link')
 cy.log('4. Select a category from the list, enter a valid email and add a comment in the Notes field. Click SAVE')
      cy.get(':nth-child(1) > .svx-formfield-content > .k-combobox').find('.k-input-inner').click().type('Work').wait(5000).type('{enter}')
      cy.get('.svx-panelbar-type-section > :nth-child(2) > .svx-formfield-content > .input-group > .k-textbox').find('.k-input-inner').type('ritchie.nathoe@testbotics.nl')
-     cy.get('.svx-panelbar-type-section > :nth-child(3) > .svx-formfield-content > .input-group > .k-textbox').find('.k-input-inner').type('comment')
+     cy.get(':nth-child(1) > .svx-panelbar-type-section > :nth-child(3) > .svx-formfield-content > .input-group > .k-textbox').find('.k-input-inner').type('comment').wait(3000)
      cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
      cy.get(':nth-child(2) > .k-card > .k-card-body > :nth-child(1)').contains('ritchie.nathoe@testbotics.nl - Work')
 
