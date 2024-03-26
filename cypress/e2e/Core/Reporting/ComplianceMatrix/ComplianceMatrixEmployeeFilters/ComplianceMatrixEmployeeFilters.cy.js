@@ -17,7 +17,7 @@ describe('Reporting', () => {
   
       })
 
-    it('Permissions Handling of Compliance Matrix', () => {
+    it('Organizational Units Filter', () => {
 
     cy.log('1. Observe Filter')
         cy.get('label[class=""]').contains('Organizational units').should('exist');

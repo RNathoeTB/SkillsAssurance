@@ -17,8 +17,6 @@ describe('Reporting', () => {
   
       })
 
-
-
     it('Compliance Matrix: General View', () => {
         
         //1. Observe the screen
