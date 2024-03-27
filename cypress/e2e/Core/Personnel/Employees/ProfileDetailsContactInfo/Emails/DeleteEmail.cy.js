@@ -23,7 +23,7 @@ describe('Personnel -> Employees -> Profile Details Contact Info', () => {
      cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
     })
     
-it('Emails -> Delete Email(s)', () => {
+it('Emails -> Delete Email(s)', () => { 
 cy.log('1. Expand the Email(s) section and observe')
      cy.get('#tree-item-4_0 > .k-link').click().wait(3000)
      cy.get('[data-col-index="1"] > .k-filtercell > .k-filtercell-wrapper > .k-textbox').find('.k-input-inner').type('DeleteEmail').wait(5000)
@@ -46,7 +46,7 @@ cy.log('3. Click CANCEL')
      cy.get(':nth-child(2) > .k-card > .k-card-body > :nth-child(1)').contains('ritchie.nathoe@testbotics.nl - Work')
      cy.get('.k-card-body > :nth-child(3)').contains('richard.nathoe@testbotics.nl - Private')
 
-cy.log('. Expand the Email(s) section, click on the bin icon of the first email and click SAVE')
+cy.log('4. Expand the Email(s) section, click on the bin icon of the first email and click SAVE')
      cy.get('.modal-buttons > :nth-child(2) > .telerik-blazor').click()
      cy.get(':nth-child(2) > details > summary > .k-icon').click()
      cy.get(':nth-child(1) > .svx-panelbar-item-delete-field > .svx-button > .k-button').click()
